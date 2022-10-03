@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	public float MoveSpeed = 30f;
-	public CharacterController2D Player;
+	public CharacterController2D PlayerController;
 
 	private float horizontalSpeed = 0f;
 	private bool jump = false;
@@ -11,11 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Awake()
 	{
-		Player = Player == null ? GetComponent<CharacterController2D>() : Player;
-		if (Player == null)
-		{
-			Debug.LogError("Player not set to controller");
-		}
+		PlayerController = PlayerController == null ? GetComponent<CharacterController2D>() : PlayerController;
 
 		_animatorController = GetComponent<Animator>();
 	}
@@ -34,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		Player.Move(horizontalSpeed * Time.fixedDeltaTime, jump);
+		PlayerController.Move(horizontalSpeed * Time.fixedDeltaTime, jump);
 		jump = false;
 	}
 
