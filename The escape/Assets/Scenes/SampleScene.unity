@@ -520,7 +520,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1459084839
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -602,8 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 30
-  Controller: {fileID: 1459084842}
-  Animator: {fileID: 1459084836}
+  Player: {fileID: 1459084842}
 --- !u!114 &1459084842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,10 +618,10 @@ MonoBehaviour:
   jumpForce: 700
   movementSmoothing: 0.05
   airControl: 1
-  whatIsGround:
+  _whatIsGround:
     serializedVersion: 2
     m_Bits: 55
-  groundCheck: {fileID: 134905782}
+  _groundCheck: {fileID: 134905782}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:

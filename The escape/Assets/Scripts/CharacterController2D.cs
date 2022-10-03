@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Controller : MonoBehaviour
+public class CharacterController2D : MonoBehaviour
 {
 	[Header("Parameters")]
 	[SerializeField] private float jumpForce = 700f;
 	[Range(0, 0.3f)][SerializeField] private float movementSmoothing = 0.05f;
 	[SerializeField] private bool airControl = false;
-	[SerializeField] private LayerMask whatIsGround;
-	[SerializeField] private Transform groundCheck;
+	[SerializeField] private LayerMask _whatIsGround;
+	[SerializeField] private Transform _groundCheck;
 
 	[Header("Events")]
 	[Space]
@@ -17,15 +17,19 @@ public class Controller : MonoBehaviour
 	private const float groundedRadius = 0.2f;
 	private bool grounded;
 	private Rigidbody2D _rigidbody;
+	private Transform _transform;
 	private Vector3 velocity = Vector3.zero;
 	private DirectionState directionState = DirectionState.Right;
 
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
+		_transform = GetComponent<Transform>();
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
+
+		directionState = _transform.localScale.x > 0 ? DirectionState.Right : DirectionState.Left;
 	}
 
 	private void FixedUpdate()
@@ -33,7 +37,7 @@ public class Controller : MonoBehaviour
 		bool wasGrounded = grounded;
 		grounded = false;
 
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundedRadius, whatIsGround);
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(_groundCheck.position, groundedRadius, _whatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
@@ -75,7 +79,7 @@ public class Controller : MonoBehaviour
 		else
 			directionState = DirectionState.Right;
 
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		_transform.localScale = new Vector3(-_transform.localScale.x, _transform.localScale.y, _transform.localScale.z);
 	}
 
 
