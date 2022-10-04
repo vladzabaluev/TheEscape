@@ -12,6 +12,10 @@ public class PlayerMovement : MonoBehaviour
 	private void Awake()
 	{
 		PlayerController = PlayerController == null ? GetComponent<CharacterController2D>() : PlayerController;
+		if (PlayerController == null)
+		{
+			Debug.LogError("Player not set to controller");
+		}
 
 		_animatorController = GetComponent<Animator>();
 	}

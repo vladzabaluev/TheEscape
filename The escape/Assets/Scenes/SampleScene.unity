@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 30
-  Player: {fileID: 1459084842}
+  PlayerController: {fileID: 0}
 --- !u!114 &1459084842
 MonoBehaviour:
   m_ObjectHideFlags: 0
