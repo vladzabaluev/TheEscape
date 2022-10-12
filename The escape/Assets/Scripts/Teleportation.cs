@@ -7,8 +7,6 @@ public class Teleportation : MonoBehaviour
     private static bool isTeleported = false;
     public bool IsActivePortal = true;
     public GameObject PointTeleport;
-    public Transform Player;
-    public Transform Portal;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (IsActivePortal)
@@ -16,12 +14,8 @@ public class Teleportation : MonoBehaviour
             if (!isTeleported)
             {
                 collision.gameObject.transform.position = PointTeleport.gameObject.transform.position;
-            }
-            if (!isTeleported)
-            {
                 isTeleported = true;
             }
-
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -30,7 +24,7 @@ public class Teleportation : MonoBehaviour
         {
             if (isTeleported)
             {
-                if (Vector2.Distance(Player.position, Portal.position) >= 1.5f)
+                if (Vector2.Distance(collision.gameObject.transform.position, PointTeleport.gameObject.transform.position) >= 1)
                 {
                     isTeleported = false;
                 }

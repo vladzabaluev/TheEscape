@@ -283,7 +283,6 @@ GameObject:
   m_Component:
   - component: {fileID: 754856243}
   - component: {fileID: 754856242}
-  - component: {fileID: 754856241}
   - component: {fileID: 754856240}
   - component: {fileID: 754856244}
   m_Layer: 0
@@ -319,22 +318,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &754856241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754856239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc8dad6039ad5b45a46f5c851e4dff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsActivePortal: 1
-  PointTeleport: {fileID: 1393237190}
-  Player: {fileID: 0}
-  Portal: {fileID: 0}
 --- !u!212 &754856242
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -416,8 +399,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActivePortal: 1
   PointTeleport: {fileID: 1393237190}
-  Player: {fileID: 1459084840}
-  Portal: {fileID: 1393237194}
 --- !u!1 &1028270082
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +568,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1393237194}
   - component: {fileID: 1393237193}
-  - component: {fileID: 1393237195}
   - component: {fileID: 1393237196}
   - component: {fileID: 1393237197}
   m_Layer: 0
@@ -664,22 +644,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1393237195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393237190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc8dad6039ad5b45a46f5c851e4dff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsActivePortal: 1
-  PointTeleport: {fileID: 754856239}
-  Player: {fileID: 0}
-  Portal: {fileID: 0}
 --- !u!61 &1393237196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -720,8 +684,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActivePortal: 1
   PointTeleport: {fileID: 754856239}
-  Player: {fileID: 1459084840}
-  Portal: {fileID: 754856243}
 --- !u!1 &1459084835
 GameObject:
   m_ObjectHideFlags: 0
