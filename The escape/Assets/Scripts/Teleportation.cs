@@ -7,6 +7,8 @@ public class Teleportation : MonoBehaviour
     private static bool isTeleported = false;
     public bool IsActivePortal = true;
     public GameObject PointTeleport;
+    public Transform Player;
+    public Transform Portal;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (IsActivePortal)
@@ -28,12 +30,11 @@ public class Teleportation : MonoBehaviour
         {
             if (isTeleported)
             {
-                Invoke("TeleportDelay",0.055f);
+                if (Vector2.Distance(Player.position, Portal.position) >= 1.5f)
+                {
+                    isTeleported = false;
+                }
             }
         }
-    }
-    void TeleportDelay()
-    {
-        isTeleported = false;
     }
 }
