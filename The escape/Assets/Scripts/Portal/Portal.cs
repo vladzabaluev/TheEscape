@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleportation : MonoBehaviour
+public class Portal : MonoBehaviour
 {
     private static bool isTeleported = false;
     public bool IsActivePortal = true;
     public GameObject PointTeleport;
+
+    public Portal nextPortal;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,9 +17,6 @@ public class Teleportation : MonoBehaviour
             if (!isTeleported)
             {
                 collision.gameObject.transform.position = PointTeleport.transform.position;
-            }
-            if (!isTeleported)
-            {
                 isTeleported = true;
             }
         }

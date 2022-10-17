@@ -18,17 +18,14 @@ public class PortalCreation : MonoBehaviour
 
     private Camera mainCamera;
 
-    private Transform portalEndPosition;
-
     private float portalLength;
 
     private void Awake()
     {
         inputActions = new PlayerInput();
         mainCamera = Camera.main;
-
-        portalEndPosition = Portal.transform.GetChild(0);
-        portalLength = Vector3.Distance(Portal.gameObject.transform.position, portalEndPosition.position);
+        //Get extreme portal point and save info about portal's length
+        portalLength = Vector3.Distance(Portal.transform.position, Portal.transform.GetChild(0).position);
     }
 
     private void OnEnable()
@@ -59,27 +56,38 @@ public class PortalCreation : MonoBehaviour
 
     private void CheckSpawnZone()
     {
-        Ray castRay = mainCamera.ScreenPointToRay(startTouchPosition);
+        startTouchPosition = mainCamera.ScreenToWorldPoint(startTouchPosition);
+        endTouchPosition = mainCamera.ScreenToWorldPoint(endTouchPosition);
 
-        if (!Physics2D.Raycast(mainCamera.ScreenToWorldPoint(startTouchPosition),
-          mainCamera.ScreenToWorldPoint(endTouchPosition) - mainCamera.ScreenToWorldPoint(startTouchPosition), portalLength))
+        if (!Physics2D.Raycast((startTouchPosition),
+          (endTouchPosition) - (startTouchPosition), portalLength))
         {
             if (canCreatePortal)
             {
-                startTouchPosition = mainCamera.ScreenToWorldPoint(startTouchPosition);
-                endTouchPosition = mainCamera.ScreenToWorldPoint(endTouchPosition);
                 CreatePortal();
             }
         }
     }
 
-    private void CreatePortal()
+    private Portal CreatePortal()
     {
-        GameObject createdPortal = Instantiate(Portal, startTouchPosition, Quaternion.identity);
+        var createdPortal = Instantiate(Portal, startTouchPosition, Quaternion.identity);
         Vector2 diff = endTouchPosition - (Vector2)createdPortal.transform.position;
         float z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        createdPortal.transform.rotation = Quaternion.Euler(0, 0, z);
+        createdPortal.gameObject.transform.rotation = Quaternion.Euler(0, 0, z);
+
+        return createdPortal.GetComponent<Portal>();
     }
+
+    //private void OnTakePortalFromPool(Portal portal)
+    //{
+    //    portal.gameObject.SetActive(true);
+    //}
+
+    //private void OnReturnPortalToPool(Portal portal)
+    //{
+    //    portal.gameObject.SetActive(true);
+    //}
 
     private void SetTheAbilityOfPortalCreation(bool canCreatePortal)
     {
