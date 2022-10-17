@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PortalCreation : MonoBehaviour
 {
-    [SerializeField] private GameObject Portal;
+    private List<Portal> portalList = new List<Portal>();
+
     private PlayerInput inputActions;
     private InputAction TouchInput;
     private InputAction TouchPosition;
@@ -18,6 +19,10 @@ public class PortalCreation : MonoBehaviour
 
     private Camera mainCamera;
 
+    [SerializeField] private GameObject portal;
+    [SerializeField] private int maxPortalCount;
+    private int currentPortalIndex = 0;
+
     private float portalLength;
 
     private void Awake()
@@ -25,7 +30,7 @@ public class PortalCreation : MonoBehaviour
         inputActions = new PlayerInput();
         mainCamera = Camera.main;
         //Get extreme portal point and save info about portal's length
-        portalLength = Vector3.Distance(Portal.transform.position, Portal.transform.GetChild(0).position);
+        portalLength = Vector3.Distance(portal.transform.position, portal.transform.GetChild(0).position);
     }
 
     private void OnEnable()
@@ -42,9 +47,29 @@ public class PortalCreation : MonoBehaviour
         TouchPosition.Enable();
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < maxPortalCount; i++)
+        {
+            GameObject createdPortal = Instantiate(portal, transform.position, Quaternion.identity);
+            portalList.Add(createdPortal.GetComponent<Portal>());
+        }
+        Debug.Log(portalList.Count);
+        for (int i = 0; i < portalList.Count; i++)
+        {
+            Debug.Log(portalList[i].gameObject.name);
+            if (i == portalList.Count - 1)
+                portalList[i].anotherPortal = portalList[0];
+            else
+                portalList[i].anotherPortal = portalList[i + 1];
+
+            portalList[i].gameObject.SetActive(false);
+            portalList[i].gameObject.GetComponent<Portal>().IsActivePortal = false;
+        }
+    }
+
     private void SaveStartTouchPosition(InputAction.CallbackContext obj)
     {
-        Debug.Log(TouchPosition.ReadValue<Vector2>());
         startTouchPosition = TouchPosition.ReadValue<Vector2>();
     }
 
@@ -69,14 +94,25 @@ public class PortalCreation : MonoBehaviour
         }
     }
 
-    private Portal CreatePortal()
+    private void CreatePortal()
     {
-        var createdPortal = Instantiate(Portal, startTouchPosition, Quaternion.identity);
+        GameObject createdPortal = portalList[currentPortalIndex].gameObject;
+        createdPortal.transform.position = startTouchPosition;
+        createdPortal.GetComponent<Portal>().IsActivePortal = true;
+        createdPortal.SetActive(true);
+        if (currentPortalIndex == portalList.Count - 1)
+        {
+            currentPortalIndex = 0;
+        }
+        else
+        {
+            currentPortalIndex++;
+        }
         Vector2 diff = endTouchPosition - (Vector2)createdPortal.transform.position;
         float z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        createdPortal.gameObject.transform.rotation = Quaternion.Euler(0, 0, z);
+        createdPortal.transform.rotation = Quaternion.Euler(0, 0, z);
 
-        return createdPortal.GetComponent<Portal>();
+        // return createdPortal.GetComponent<Portal>();
     }
 
     //private void OnTakePortalFromPool(Portal portal)
