@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 30
-  PlayerController: {fileID: 0}
+  MovementController: {fileID: 1459084842}
 --- !u!114 &1459084842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,28 +615,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f3b2916d27eae49933f688c5d56d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 700
-  movementSmoothing: 0.05
-  airControl: 1
+  _jumpForce: 700
+  _movementSmoothing: 0.08
+  _airControl: 1
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 55
   _groundCheck: {fileID: 134905782}
   OnLandEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1459084841}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnLanding
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1580027490
 GameObject:
   m_ObjectHideFlags: 0
