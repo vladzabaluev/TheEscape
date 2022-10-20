@@ -4,16 +4,15 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 	public float MoveSpeed = 30f;
+	[Range(0f, 1f)][SerializeField] private float _deadZoneY = 0.5f;
+	[Range(0f, 1f)][SerializeField] private float _deadZoneX = 0.3f;
 	public MovementController2D MovementController;
-
-	private float _horizontalSpeed;
-	private bool _jump;
+	
 	private Animator _animatorController;
 	private PlayerInputActions _playerInputActions;
 	private InputAction _movement;
-	
-	private static readonly int Speed = Animator.StringToHash("Speed");
-	private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+	private float _horizontalSpeed;
+	private bool _allowJump;
 
 	private void Awake()
 	{
@@ -45,24 +44,32 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
-		_horizontalSpeed = _movement.ReadValue<Vector2>().x * MoveSpeed;
-		_animatorController.SetFloat(Speed, Mathf.Abs(_horizontalSpeed));
+		if (Mathf.Abs(_movement.ReadValue<Vector2>().x) >= _deadZoneX)
+			_horizontalSpeed = _movement.ReadValue<Vector2>().x * MoveSpeed;
+		else
+			_horizontalSpeed = 0f;
+		
+		if (_movement.ReadValue<Vector2>().y >= _deadZoneY)
+			DoJump();
 	}
 
 	private void FixedUpdate()
 	{
-		MovementController.Move(_horizontalSpeed * Time.fixedDeltaTime, _jump);
-		_jump = false;
+		MovementController.Move(_horizontalSpeed * Time.fixedDeltaTime);
+	}
+
+	private void DoJump()
+	{
+		MovementController.Jump();
 	}
 	
 	private void DoJump(InputAction.CallbackContext obj)
 	{
-		_jump = true;
-		_animatorController.SetBool(IsJumping, true);
+		DoJump();
 	}
 
 	public void OnLanding()
 	{
-		_animatorController.SetBool(IsJumping, false);
+		
 	}
 }

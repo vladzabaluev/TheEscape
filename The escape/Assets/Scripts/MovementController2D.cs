@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,7 +6,7 @@ public class MovementController2D : MonoBehaviour
 {
 	[Header("Parameters")]
 	[SerializeField] private float _jumpForce = 700f;
-	[Range(0, 0.3f)][SerializeField] private float _movementSmoothing = 0.05f;
+	[Range(0, 0.3f)][SerializeField] private float _movementSmoothing = 0.08f;
 	[SerializeField] private bool _airControl = true;
 	[SerializeField] private LayerMask _whatIsGround;
 	[SerializeField] private Transform _groundCheck;
@@ -16,6 +17,7 @@ public class MovementController2D : MonoBehaviour
 
 	private const float groundedRadius = 0.2f;
 	private bool _grounded;
+	private bool _jumpPermission;
 	private Rigidbody2D _rigidbody;
 	private Transform _transform;
 	private Vector3 _velocity = Vector3.zero;
@@ -44,12 +46,15 @@ public class MovementController2D : MonoBehaviour
 			{
 				_grounded = true;
 				if (wasGrounded)
+				{
 					OnLandEvent.Invoke();
+					SwitchJumpPermission();
+				}
 			}
 		}
 	}
 
-	public void Move(float move, bool jump)
+	public void Move(float move)
 	{
 		if (_grounded || _airControl)
 		{
@@ -65,23 +70,28 @@ public class MovementController2D : MonoBehaviour
 					break;
 			}
 		}
-		if (_grounded && jump)
+	}
+
+	public void Jump()
+	{
+		if (_grounded && _jumpPermission)
 		{
+			SwitchJumpPermission();
 			_grounded = false;
 			_rigidbody.AddForce(new Vector2(0f, _jumpForce));
 		}
 	}
 
+	private void SwitchJumpPermission()
+	{
+		_jumpPermission = !_jumpPermission;
+	}
+	
 	private void ChangeDirection()
 	{
-		if (_directionState == DirectionState.Right)
-			_directionState = DirectionState.Left;
-		else
-			_directionState = DirectionState.Right;
+		_directionState = _directionState == DirectionState.Right ? DirectionState.Left : DirectionState.Right;
 
-		Vector3 localScale = _transform.localScale;
-		localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
-		_transform.localScale = localScale;
+		_transform.Rotate(0f, 180f, 0f);
 	}
 	
 	private enum DirectionState
