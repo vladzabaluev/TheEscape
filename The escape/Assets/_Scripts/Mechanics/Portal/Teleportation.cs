@@ -1,32 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleportation : MonoBehaviour
+namespace _Scripts.Mechanics.Portal
 {
-    private static bool isTeleported = false;
-    public bool IsActivePortal = true;
-    public GameObject PointTeleport;
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class Teleportation : MonoBehaviour
     {
-        if (IsActivePortal)
+        private static bool isTeleported = false;
+        public bool IsActivePortal = true;
+        public GameObject PointTeleport;
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!isTeleported)
+            if (IsActivePortal)
             {
-                collision.gameObject.transform.position = PointTeleport.gameObject.transform.position;
-                isTeleported = true;
+                if (!isTeleported)
+                {
+                    collision.gameObject.transform.position = PointTeleport.gameObject.transform.position;
+                    isTeleported = true;
+                }
             }
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (IsActivePortal)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            if (isTeleported)
+            if (IsActivePortal)
             {
-                if (Vector2.Distance(collision.gameObject.transform.position, PointTeleport.gameObject.transform.position) >= 1)
+                if (isTeleported)
                 {
-                    isTeleported = false;
+                    if (Vector2.Distance(collision.gameObject.transform.position, PointTeleport.gameObject.transform.position) >= 1)
+                    {
+                        isTeleported = false;
+                    }
                 }
             }
         }

@@ -1,47 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+namespace _Scripts.Systems.Health
 {
-
-    public Image bar;
-    public float fill;
-    float last_damage_time;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerHealth : MonoBehaviour
     {
-        fill = 1f;
-        last_damage_time = Time.time;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-       if (fill<=0f)
-        {
-            Debug.Log("Game Over");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
+        public Image bar;
+        public float fill;
+        float last_damage_time;
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            Debug.Log("Game Over");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
 
-        else if (collision.gameObject.tag == "Enemy" && Time.time > (last_damage_time + 2))
+        // Start is called before the first frame update
+        void Start()
         {
-            fill -= 0.34f;
-            bar.fillAmount = fill;
+            fill = 1f;
             last_damage_time = Time.time;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (fill<=0f)
+            {
+                Debug.Log("Game Over");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Obstacle")
+            {
+                Debug.Log("Game Over");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
+            else if (collision.gameObject.tag == "Enemy" && Time.time > (last_damage_time + 2))
+            {
+                fill -= 0.34f;
+                bar.fillAmount = fill;
+                last_damage_time = Time.time;
+            }
         }
     }
 }

@@ -1,40 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : MonoBehaviour
+namespace _Scripts.Mechanics.Portal
 {
-    private static bool isTeleported = false;
-    public bool IsActivePortal = true;
-
-    //Делаем эту системы с переменной чуть более гибкой
-    [SerializeField] private float minDistanceToTeleportAgain = 1f;
-
-    //Таким образом не любой объект может стать тем, что мы
-    //называем порталом, а только тот, на котором висит этот скрипт(просто лишний раз обезопасиваешь себя от ошибок)
-    public Portal anotherPortal;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class Portal : MonoBehaviour
     {
-        //Нам нужно проверять активен ли другой портал, а не тот, в который мы входим
-        if (anotherPortal.IsActivePortal)
+        private static bool isTeleported = false;
+        public bool IsActivePortal = true;
+
+        //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        [SerializeField] private float minDistanceToTeleportAgain = 1f;
+
+        //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅ
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
+        public Portal anotherPortal;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!isTeleported)
+            //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅ пїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+            if (anotherPortal.IsActivePortal)
             {
-                collision.gameObject.transform.position = anotherPortal.gameObject.transform.position;
-                isTeleported = true;
+                if (!isTeleported)
+                {
+                    collision.gameObject.transform.position = anotherPortal.gameObject.transform.position;
+                    isTeleported = true;
+                }
             }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (isTeleported)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            if (Vector2.Distance(collision.gameObject.transform.position,
-                anotherPortal.gameObject.transform.position) >= minDistanceToTeleportAgain)
+            if (isTeleported)
             {
-                isTeleported = false;
+                if (Vector2.Distance(collision.gameObject.transform.position,
+                        anotherPortal.gameObject.transform.position) >= minDistanceToTeleportAgain)
+                {
+                    isTeleported = false;
+                }
             }
         }
     }
