@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.101960786}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -247,4 +247,6 @@ MonoBehaviour:
   deadZone: 0
   background: {fileID: 3048799876971840213}
   handle: {fileID: 3048799877155063350}
+  stepForAlpha: 0.01
+  timeUpdateAlpha: 0.01
   m_ControlPath: <Joystick>/stick

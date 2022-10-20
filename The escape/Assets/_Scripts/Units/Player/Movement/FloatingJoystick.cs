@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.OnScreen;
@@ -21,10 +23,16 @@ namespace _Scripts.Units.Player.Movement
     
         [SerializeField] private float handleRange = 1;
         [SerializeField] private float deadZone = 0;
-        [SerializeField] private RectTransform background = null;
-        [SerializeField] private RectTransform handle = null;
-        private RectTransform baseRect = null;
+        [SerializeField] private RectTransform background;
+        [SerializeField] private RectTransform handle;
+        
+        [Space]
+        [SerializeField] private float stepForAlpha = 0.01f;
+        [SerializeField] private float timeUpdateAlpha = 0.01f;
 
+        private RectTransform baseRect;
+        private Image imageOfBackground;
+        private Image imageOfHandle;
         private Canvas canvas;
         private Camera cam;
     
@@ -36,6 +44,8 @@ namespace _Scripts.Units.Player.Movement
             DeadZone = deadZone;
             baseRect = GetComponent<RectTransform>();
             canvas = GetComponentInParent<Canvas>();
+            imageOfBackground = background.GetComponent<Image>();
+            imageOfHandle = handle.GetComponent<Image>();
             if (canvas == null)
                 Debug.LogError("The Joystick is not placed inside a canvas");
 
@@ -53,10 +63,11 @@ namespace _Scripts.Units.Player.Movement
         {
             if (eventData == null)
                 throw new System.ArgumentNullException(nameof(eventData));
-        
+            
+            StopAllCoroutines();
+            
             background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
-            background.gameObject.SetActive(true);
-        
+            JoystickTurningOn();
             OnDrag(eventData);
         }
 
@@ -81,7 +92,7 @@ namespace _Scripts.Units.Player.Movement
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            background.gameObject.SetActive(false);
+            StartCoroutine(JoystickTurningOff());
         
             SendValueToControl(Vector2.zero);
             handle.anchoredPosition = Vector2.zero;
@@ -107,6 +118,28 @@ namespace _Scripts.Units.Player.Movement
                 return localPoint - (background.anchorMax * baseRect.sizeDelta) + pivotOffset;
             }
             return Vector2.zero;
+        }
+
+        IEnumerator JoystickTurningOff()
+        {
+            float alpha = 1f;
+
+            while (imageOfBackground.color.a >= 0f)
+            {
+                alpha -= stepForAlpha;
+                imageOfHandle.color = imageOfBackground.color = new Color(1f, 1f, 1f, alpha);
+
+                yield return new WaitForSeconds(timeUpdateAlpha);
+
+                if (imageOfBackground.color.a <= 0)
+                    background.gameObject.SetActive(false);
+            }
+        }
+
+        private void JoystickTurningOn()
+        {
+            background.gameObject.SetActive(true);
+            imageOfHandle.color = imageOfBackground.color = new Color(1f, 1f, 1f, 1f);
         }
 
         [InputControl(layout = "Vector2")]

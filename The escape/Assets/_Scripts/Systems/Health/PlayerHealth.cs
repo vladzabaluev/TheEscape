@@ -6,21 +6,20 @@ namespace _Scripts.Systems.Health
 {
     public class PlayerHealth : MonoBehaviour
     {
-
         public Image bar;
         public float fill;
-        float last_damage_time;
+        private float last_damage_time;
 
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             fill = 1f;
             last_damage_time = Time.time;
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (fill<=0f)
             {
