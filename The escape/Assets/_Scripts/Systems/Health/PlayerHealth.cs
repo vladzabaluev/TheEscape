@@ -6,40 +6,41 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-
     public Image bar;
-    public float fill;
+    private float fill, curHealth;
+    public float maxHealth = 100f, damage = 20f;
     float last_damage_time;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        curHealth = maxHealth;
         fill = 1f;
         last_damage_time = Time.time;
     }
 
+    public void PlayerDeath()
+    {
+        Debug.Log("Game Over");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     // Update is called once per frame
     void Update()
     {
-       if (fill<=0f)
+       if (curHealth<= 0f)
         {
-            Debug.Log("Game Over");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            PlayerDeath();
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Obstacle")
+        EnemyCombat enemy = collision.gameObject.GetComponent<EnemyCombat>();
+        if (enemy!=null && Time.time > (last_damage_time + 2))
         {
-            Debug.Log("Game Over");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        else if (collision.gameObject.tag == "Enemy" && Time.time > (last_damage_time + 2))
-        {
-            fill -= 0.34f;
+            curHealth -= enemy.damage;
+            fill = curHealth / maxHealth;
             bar.fillAmount = fill;
             last_damage_time = Time.time;
         }
