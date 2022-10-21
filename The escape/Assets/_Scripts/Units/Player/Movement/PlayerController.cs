@@ -5,16 +5,16 @@ namespace _Scripts.Units.Player.Movement
 {
 	public class PlayerController : MonoBehaviour
 	{
-		public float MoveSpeed = 30f;
+		[SerializeField] private float _moveSpeed = 30f;
 		[Range(0f, 1f)][SerializeField] private float _deadZoneY = 0.5f;
 		[Range(0f, 1f)][SerializeField] private float _deadZoneX = 0.3f;
-		public MovementController2D MovementController;
+		[SerializeField] private MovementController2D MovementController;
 	
-		private Animator _animatorController;
-		private PlayerInputActions _playerInputActions;
-		private InputAction _movement;
 		private float _horizontalSpeed;
 		private bool _allowJump;
+		private PlayerInputActions _playerInputActions;
+		private InputAction _movement;
+		//private Animator _animatorController;
 
 		private void Awake()
 		{
@@ -26,7 +26,7 @@ namespace _Scripts.Units.Player.Movement
 				Debug.LogError("Player not set to controller");
 			}
 
-			_animatorController = GetComponent<Animator>();
+			//_animatorController = GetComponent<Animator>();
 		}
 
 		private void OnEnable()
@@ -47,7 +47,7 @@ namespace _Scripts.Units.Player.Movement
 		private void Update()
 		{
 			if (Mathf.Abs(_movement.ReadValue<Vector2>().x) >= _deadZoneX)
-				_horizontalSpeed = _movement.ReadValue<Vector2>().x * MoveSpeed;
+				_horizontalSpeed = _movement.ReadValue<Vector2>().x * _moveSpeed;
 			else
 				_horizontalSpeed = 0f;
 		
@@ -60,6 +60,11 @@ namespace _Scripts.Units.Player.Movement
 			MovementController.Move(_horizontalSpeed * Time.fixedDeltaTime);
 		}
 
+		public void OnLanding()
+		{
+		
+		}
+		
 		private void DoJump()
 		{
 			MovementController.Jump();
@@ -68,11 +73,6 @@ namespace _Scripts.Units.Player.Movement
 		private void DoJump(InputAction.CallbackContext obj)
 		{
 			DoJump();
-		}
-
-		public void OnLanding()
-		{
-		
 		}
 	}
 }

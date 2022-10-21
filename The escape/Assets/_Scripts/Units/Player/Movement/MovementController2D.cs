@@ -5,7 +5,7 @@ namespace _Scripts.Units.Player.Movement
 {
 	public class MovementController2D : MonoBehaviour
 	{
-		[Header("Parameters")]
+		[Header("Movement Parameters")]
 		[SerializeField] private float _jumpForce = 700f;
 		[Range(0, 0.3f)][SerializeField] private float _movementSmoothing = 0.08f;
 		[SerializeField] private bool _airControl = true;
@@ -41,9 +41,9 @@ namespace _Scripts.Units.Player.Movement
 			_grounded = false;
 
 			Collider2D[] colliders = Physics2D.OverlapCircleAll(_groundCheck.position, groundedRadius, _whatIsGround);
-			for (int i = 0; i < colliders.Length; i++)
+			foreach (var foundCollider in colliders)
 			{
-				if (colliders[i].gameObject != gameObject)
+				if (foundCollider.gameObject != gameObject)
 				{
 					_grounded = true;
 					if (wasGrounded)

@@ -9,24 +9,18 @@ namespace _Scripts.Units.Player.Movement
 {
     public class FloatingJoystick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        public float HandleRange
-        {
-            get { return handleRange; }
-            set { handleRange = Mathf.Abs(value); }
-        }
-
-        public float DeadZone
-        {
-            get { return deadZone; }
-            set { deadZone = Mathf.Abs(value); }
-        }
-    
+        [Header("Joystick Parameters")]
         [SerializeField] private float handleRange = 1;
-        [SerializeField] private float deadZone = 0;
+        [SerializeField] private float deadZone;
         [SerializeField] private RectTransform background;
         [SerializeField] private RectTransform handle;
         
         [Space]
+        [InputControl(layout = "Vector2")]
+        [SerializeField]
+        private string m_ControlPath;
+        
+        [Header("Joystick Anim Parameters")]
         [SerializeField] private float stepForAlpha = 0.01f;
         [SerializeField] private float timeUpdateAlpha = 0.01f;
 
@@ -58,7 +52,19 @@ namespace _Scripts.Units.Player.Movement
         
             background.gameObject.SetActive(false);
         }
-    
+        
+        public float HandleRange
+        {
+            get => handleRange;
+            set => handleRange = Mathf.Abs(value);
+        }
+
+        public float DeadZone
+        {
+            get => deadZone;
+            set => deadZone = Mathf.Abs(value);
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             if (eventData == null)
@@ -86,7 +92,7 @@ namespace _Scripts.Units.Player.Movement
         
             SendValueToControl(input);
         
-            HandleInput(input.magnitude, input.normalized, radius, cam);
+            HandleInput(input.magnitude, input.normalized);
             handle.anchoredPosition = input * radius * handleRange;
         }
 
@@ -97,8 +103,8 @@ namespace _Scripts.Units.Player.Movement
             SendValueToControl(Vector2.zero);
             handle.anchoredPosition = Vector2.zero;
         }
-    
-        protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
+
+        private void HandleInput(float magnitude, Vector2 normalised)
         {
             if (magnitude > deadZone)
             {
@@ -111,11 +117,11 @@ namespace _Scripts.Units.Player.Movement
 
         private Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
         {
-            Vector2 localPoint = Vector2.zero;
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(baseRect, screenPosition, cam, out localPoint))
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(baseRect, screenPosition, cam, out var localPoint))
             {
-                Vector2 pivotOffset = baseRect.pivot * baseRect.sizeDelta;
-                return localPoint - (background.anchorMax * baseRect.sizeDelta) + pivotOffset;
+                Vector2 sizeDelta;
+                Vector2 pivotOffset = baseRect.pivot * (sizeDelta = baseRect.sizeDelta);
+                return localPoint - (background.anchorMax * sizeDelta) + pivotOffset;
             }
             return Vector2.zero;
         }
@@ -141,10 +147,6 @@ namespace _Scripts.Units.Player.Movement
             background.gameObject.SetActive(true);
             imageOfHandle.color = imageOfBackground.color = new Color(1f, 1f, 1f, 1f);
         }
-
-        [InputControl(layout = "Vector2")]
-        [SerializeField]
-        private string m_ControlPath;
 
         protected override string controlPathInternal
         {
