@@ -8,9 +8,9 @@ namespace _Scripts.Mechanics.Portal
     {
         private List<Portal> portalList = new List<Portal>();
 
-        private PlayerInput inputActions;
-        private InputAction TouchInput;
-        private InputAction TouchPosition;
+        private PlayerInputActions inputActions;
+        private InputAction touchInput;
+        private InputAction touchPosition;
 
         private Vector2 startTouchPosition;
         private Vector2 endTouchPosition;
@@ -21,13 +21,13 @@ namespace _Scripts.Mechanics.Portal
 
         [SerializeField] private GameObject portal;
         [SerializeField] private int maxPortalCount;
-        private int currentPortalIndex = 0;
+        private int currentPortalIndex;
 
         private float portalLength;
 
         private void Awake()
         {
-            inputActions = new PlayerInput();
+            inputActions = new PlayerInputActions();
             mainCamera = Camera.main;
             //Get extreme portal point and save info about portal's length
             portalLength = Vector3.Distance(portal.transform.position, portal.transform.GetChild(0).position);
@@ -37,14 +37,14 @@ namespace _Scripts.Mechanics.Portal
         {
             inputActions.GameProcess.Enable();
 
-            TouchInput = inputActions.GameProcess.TouchInput;
-            TouchPosition = inputActions.GameProcess.TouchPosition;
+            touchInput = inputActions.GameProcess.TouchInput;
+            touchPosition = inputActions.GameProcess.TouchPosition;
 
-            TouchInput.performed += SaveStartTouchPosition;
-            TouchInput.canceled += SaveEndTouchPosition;
+            touchInput.performed += SaveStartTouchPosition;
+            touchInput.canceled += SaveEndTouchPosition;
 
-            TouchInput.Enable();
-            TouchPosition.Enable();
+            touchInput.Enable();
+            touchPosition.Enable();
         }
 
         private void Start()
@@ -70,12 +70,12 @@ namespace _Scripts.Mechanics.Portal
 
         private void SaveStartTouchPosition(InputAction.CallbackContext obj)
         {
-            startTouchPosition = TouchPosition.ReadValue<Vector2>();
+            startTouchPosition = touchPosition.ReadValue<Vector2>();
         }
 
         private void SaveEndTouchPosition(InputAction.CallbackContext obj)
         {
-            endTouchPosition = TouchPosition.ReadValue<Vector2>();
+            endTouchPosition = touchPosition.ReadValue<Vector2>();
             CheckSpawnZone();
         }
 
@@ -132,8 +132,8 @@ namespace _Scripts.Mechanics.Portal
 
         private void OnDisable()
         {
-            TouchInput.Disable();
-            TouchPosition.Disable();
+            touchInput.Disable();
+            touchPosition.Disable();
         }
     }
 }

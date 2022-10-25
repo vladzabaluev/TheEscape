@@ -813,6 +813,54 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameProcess"",
+            ""id"": ""c9f53973-b5ec-4053-9ac2-ffb6ca7810d9"",
+            ""actions"": [
+                {
+                    ""name"": ""TouchInput"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c0f4055-7b0d-4476-8a74-2ef6af042700"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TouchPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""0ebd4b05-0373-4708-aa0d-dd4d0509927b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7e121a70-c262-4d6f-ad91-2a340abb586d"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51052e0a-6376-4b15-b0ff-c9c1c21a6462"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -896,6 +944,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // GameProcess
+        m_GameProcess = asset.FindActionMap("GameProcess", throwIfNotFound: true);
+        m_GameProcess_TouchInput = m_GameProcess.FindAction("TouchInput", throwIfNotFound: true);
+        m_GameProcess_TouchPosition = m_GameProcess.FindAction("TouchPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1113,6 +1165,47 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // GameProcess
+    private readonly InputActionMap m_GameProcess;
+    private IGameProcessActions m_GameProcessActionsCallbackInterface;
+    private readonly InputAction m_GameProcess_TouchInput;
+    private readonly InputAction m_GameProcess_TouchPosition;
+    public struct GameProcessActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public GameProcessActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TouchInput => m_Wrapper.m_GameProcess_TouchInput;
+        public InputAction @TouchPosition => m_Wrapper.m_GameProcess_TouchPosition;
+        public InputActionMap Get() { return m_Wrapper.m_GameProcess; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameProcessActions set) { return set.Get(); }
+        public void SetCallbacks(IGameProcessActions instance)
+        {
+            if (m_Wrapper.m_GameProcessActionsCallbackInterface != null)
+            {
+                @TouchInput.started -= m_Wrapper.m_GameProcessActionsCallbackInterface.OnTouchInput;
+                @TouchInput.performed -= m_Wrapper.m_GameProcessActionsCallbackInterface.OnTouchInput;
+                @TouchInput.canceled -= m_Wrapper.m_GameProcessActionsCallbackInterface.OnTouchInput;
+                @TouchPosition.started -= m_Wrapper.m_GameProcessActionsCallbackInterface.OnTouchPosition;
+                @TouchPosition.performed -= m_Wrapper.m_GameProcessActionsCallbackInterface.OnTouchPosition;
+                @TouchPosition.canceled -= m_Wrapper.m_GameProcessActionsCallbackInterface.OnTouchPosition;
+            }
+            m_Wrapper.m_GameProcessActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @TouchInput.started += instance.OnTouchInput;
+                @TouchInput.performed += instance.OnTouchInput;
+                @TouchInput.canceled += instance.OnTouchInput;
+                @TouchPosition.started += instance.OnTouchPosition;
+                @TouchPosition.performed += instance.OnTouchPosition;
+                @TouchPosition.canceled += instance.OnTouchPosition;
+            }
+        }
+    }
+    public GameProcessActions @GameProcess => new GameProcessActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1177,5 +1270,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IGameProcessActions
+    {
+        void OnTouchInput(InputAction.CallbackContext context);
+        void OnTouchPosition(InputAction.CallbackContext context);
     }
 }
