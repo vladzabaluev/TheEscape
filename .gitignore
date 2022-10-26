@@ -9,7 +9,10 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
+
+# My ignore files
 HealthHeartSystem/
+HealthHeartSystem.meta
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -26,6 +29,7 @@ HealthHeartSystem/
 
 # Visual Studio cache directory
 .vs/
+.vsconfig
 
 # JetBrains Rider cache directory
 .idea/

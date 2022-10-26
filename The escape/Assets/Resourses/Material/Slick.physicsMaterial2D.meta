@@ -1,8 +1,21 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream:The escape/Assets/Resourses/Material/Slick.physicsMaterial2D.meta
+=======
+>>>>>>> Stashed changes
 guid: e6547eb4dd21d56329286ce1392fc7c0
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 6200000
+<<<<<<< Updated upstream
+=======
+guid: a927ebe058fd215dfa0b9347b99e6661
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+>>>>>>> Stashed changes:The escape/Assets/HealthHeartSystem/Scenes/ExampleSceneSettings.lighting.meta
+=======
+>>>>>>> Stashed changes
   userData: 
   assetBundleName: 
   assetBundleVariant: 

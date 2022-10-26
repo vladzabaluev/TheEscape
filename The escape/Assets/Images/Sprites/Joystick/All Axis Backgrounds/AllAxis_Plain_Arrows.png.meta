@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream:The escape/Assets/Images/Sprites/Joystick/All Axis Backgrounds/AllAxis_Plain_Arrows.png.meta
 guid: ed7698af1732873c5a22e79c1cf91dff
+=======
+guid: b751a989d6bf316aea56321163d80f2b
+>>>>>>> Stashed changes:The escape/Assets/Images/Sprites/Joystick/All Axis Backgrounds/AllAxis_Plain.png.meta
+=======
+guid: ed7698af1732873c5a22e79c1cf91dff
+>>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
