@@ -13,6 +13,7 @@
 # My ignore files
 HealthHeartSystem/
 HealthHeartSystem.meta
+Slick.physicsMaterial2D.meta~merged
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
