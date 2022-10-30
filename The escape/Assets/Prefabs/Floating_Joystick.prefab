@@ -243,10 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5c4f62622999c69820c213d668df6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handleRange: 1
-  deadZone: 0
-  background: {fileID: 3048799876971840213}
-  handle: {fileID: 3048799877155063350}
-  stepForAlpha: 0.01
-  timeUpdateAlpha: 0.01
-  m_ControlPath: <Joystick>/stick
+  _handleRange: 1
+  _deadZone: 0
+  _background: {fileID: 3048799876971840213}
+  _handle: {fileID: 3048799877155063350}
+  _controlPath: <Gamepad>/leftStick
+  _stepForAlpha: 0.01
+  _timeUpdateAlpha: 0.01

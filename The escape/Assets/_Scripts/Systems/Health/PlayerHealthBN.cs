@@ -4,21 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealthBN : MonoBehaviour
 {
-	public delegate void OnHealthChangedDelegate();
-	public OnHealthChangedDelegate OnHealthChangedCallback;
-
 	[SerializeField] private float _health;
 	[SerializeField] private float _maxHealth;
 
+	public delegate void OnHealthChangedDelegate();
+	public OnHealthChangedDelegate OnHealthChangedCallback;
+
 	public float Health => _health;
 	public float MaxHealth => _maxHealth;
-
 	public bool IsAlive => _health > 0f;
-    
+
 	public void TakeDamage(float damage)
 	{
 		if (damage < 0)
+		{
 			throw new ArgumentOutOfRangeException(nameof(damage));
+		}
 
 		_health -= damage;
 		ClampHealth();
@@ -33,7 +34,7 @@ public class PlayerHealthBN : MonoBehaviour
 	private void ClampHealth()
 	{
 		_health = Mathf.Clamp(_health, 0f, _maxHealth);
-		
+
 		if (OnHealthChangedCallback != null)
 			OnHealthChangedCallback.Invoke();
 	}

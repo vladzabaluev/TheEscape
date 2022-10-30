@@ -606,9 +606,9 @@ GameObject:
   m_Component:
   - component: {fileID: 886164677}
   - component: {fileID: 886164679}
-  - component: {fileID: 886164678}
-  - component: {fileID: 886164681}
   - component: {fileID: 886164680}
+  - component: {fileID: 886164681}
+  - component: {fileID: 886164678}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackDamage: 1
-  _defaultAttackCooldown: 0.5
+  _defaultAttackCooldown: 1
   _playerHealthBN: {fileID: 0}
 --- !u!61 &886164681
 BoxCollider2D:

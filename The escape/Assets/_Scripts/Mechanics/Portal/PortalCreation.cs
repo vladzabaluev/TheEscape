@@ -2,138 +2,134 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace _Scripts.Mechanics.Portal
+public class PortalCreation : MonoBehaviour
 {
-    public class PortalCreation : MonoBehaviour
-    {
-        private List<Portal> portalList = new List<Portal>();
+	[SerializeField] private GameObject _portal;
+	[SerializeField] private int _maxPortalCount;
 
-        private PlayerInputActions inputActions;
-        private InputAction touchInput;
-        private InputAction touchPosition;
+	private readonly List<Portal> _portalList = new();
 
-        private Vector2 startTouchPosition;
-        private Vector2 endTouchPosition;
+	private PlayerInputActions _inputActions;
+	private InputAction _touchInput;
+	private InputAction _touchPosition;
 
-        private bool canCreatePortal = true;
+	private Vector2 _startTouchPosition;
+	private Vector2 _endTouchPosition;
 
-        private Camera mainCamera;
+	private Camera _mainCamera;
 
-        [SerializeField] private GameObject portal;
-        [SerializeField] private int maxPortalCount;
-        private int currentPortalIndex;
+	private int _currentPortalIndex;
+	private float _portalLength;
+	private bool _canCreatePortal = true;
 
-        private float portalLength;
+	private void Awake()
+	{
+		_inputActions = new PlayerInputActions();
+		_mainCamera = Camera.main;
 
-        private void Awake()
-        {
-            inputActions = new PlayerInputActions();
-            mainCamera = Camera.main;
-            //Get extreme portal point and save info about portal's length
-            portalLength = Vector3.Distance(portal.transform.position, portal.transform.GetChild(0).position);
-        }
+		// Get extreme portal point and save info about portal's length.
+		_portalLength = Vector3.Distance(_portal.transform.position, _portal.transform.GetChild(0).position);
+	}
 
-        private void OnEnable()
-        {
-            inputActions.GameProcess.Enable();
+	private void OnEnable()
+	{
+		_inputActions.GameProcess.Enable();
 
-            touchInput = inputActions.GameProcess.TouchInput;
-            touchPosition = inputActions.GameProcess.TouchPosition;
+		_touchInput = _inputActions.GameProcess.TouchInput;
+		_touchPosition = _inputActions.GameProcess.TouchPosition;
 
-            touchInput.performed += SaveStartTouchPosition;
-            touchInput.canceled += SaveEndTouchPosition;
+		_touchInput.performed += SaveStartTouchPosition;
+		_touchInput.canceled += SaveEndTouchPosition;
 
-            touchInput.Enable();
-            touchPosition.Enable();
-        }
+		_touchInput.Enable();
+		_touchPosition.Enable();
+	}
 
-        private void Start()
-        {
-            for (int i = 0; i < maxPortalCount; i++)
-            {
-                GameObject createdPortal = Instantiate(portal, transform.position, Quaternion.identity);
-                portalList.Add(createdPortal.GetComponent<Portal>());
-            }
-            Debug.Log(portalList.Count);
-            for (int i = 0; i < portalList.Count; i++)
-            {
-                Debug.Log(portalList[i].gameObject.name);
-                if (i == portalList.Count - 1)
-                    portalList[i].anotherPortal = portalList[0];
-                else
-                    portalList[i].anotherPortal = portalList[i + 1];
+	private void Start()
+	{
+		for (var i = 0; i < _maxPortalCount; i++)
+		{
+			GameObject createdPortal = Instantiate(_portal, transform.position, Quaternion.identity);
+			_portalList.Add(createdPortal.GetComponent<Portal>());
+		}
+		Debug.Log(_portalList.Count);
 
-                portalList[i].gameObject.SetActive(false);
-                portalList[i].gameObject.GetComponent<Portal>().IsActivePortal = false;
-            }
-        }
+		for (var i = 0; i < _portalList.Count; i++)
+		{
+			Debug.Log(_portalList[i].gameObject.name);
 
-        private void SaveStartTouchPosition(InputAction.CallbackContext obj)
-        {
-            startTouchPosition = touchPosition.ReadValue<Vector2>();
-        }
+			if (i == _portalList.Count - 1)
+			{
+				_portalList[i].AnotherPortal = _portalList[0];
+			}
+			else
+			{
+				_portalList[i].AnotherPortal = _portalList[i + 1];
+			}
 
-        private void SaveEndTouchPosition(InputAction.CallbackContext obj)
-        {
-            endTouchPosition = touchPosition.ReadValue<Vector2>();
-            CheckSpawnZone();
-        }
+			_portalList[i].gameObject.SetActive(false);
+			_portalList[i].gameObject.GetComponent<Portal>().IsActivePortal = false;
+		}
+	}
 
-        private void CheckSpawnZone()
-        {
-            startTouchPosition = mainCamera.ScreenToWorldPoint(startTouchPosition);
-            endTouchPosition = mainCamera.ScreenToWorldPoint(endTouchPosition);
+	private void SaveStartTouchPosition(InputAction.CallbackContext obj)
+	{
+		_startTouchPosition = _touchPosition.ReadValue<Vector2>();
+	}
 
-            if (!Physics2D.Raycast((startTouchPosition),
-                    (endTouchPosition) - (startTouchPosition), portalLength))
-            {
-                if (canCreatePortal)
-                {
-                    CreatePortal();
-                }
-            }
-        }
+	private void SaveEndTouchPosition(InputAction.CallbackContext obj)
+	{
+		_endTouchPosition = _touchPosition.ReadValue<Vector2>();
+		CheckSpawnZone();
+	}
 
-        private void CreatePortal()
-        {
-            GameObject createdPortal = portalList[currentPortalIndex].gameObject;
-            createdPortal.transform.position = startTouchPosition;
-            createdPortal.GetComponent<Portal>().IsActivePortal = true;
-            createdPortal.SetActive(true);
-            if (currentPortalIndex == portalList.Count - 1)
-            {
-                currentPortalIndex = 0;
-            }
-            else
-            {
-                currentPortalIndex++;
-            }
-            Vector2 diff = endTouchPosition - (Vector2)createdPortal.transform.position;
-            float z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            createdPortal.transform.rotation = Quaternion.Euler(0, 0, z);
+	private void CheckSpawnZone()
+	{
+		_startTouchPosition = _mainCamera.ScreenToWorldPoint(_startTouchPosition);
+		_endTouchPosition = _mainCamera.ScreenToWorldPoint(_endTouchPosition);
 
-            // return createdPortal.GetComponent<Portal>();
-        }
+		if (!Physics2D.Raycast((_startTouchPosition), _endTouchPosition - _startTouchPosition, _portalLength))
+			if (_canCreatePortal)
+				CreatePortal();
+	}
 
-        //private void OnTakePortalFromPool(Portal portal)
-        //{
-        //    portal.gameObject.SetActive(true);
-        //}
+	private void CreatePortal()
+	{
+		GameObject createdPortal = _portalList[_currentPortalIndex].gameObject;
+		createdPortal.transform.position = _startTouchPosition;
+		createdPortal.GetComponent<Portal>().IsActivePortal = true;
+		createdPortal.SetActive(true);
 
-        //private void OnReturnPortalToPool(Portal portal)
-        //{
-        //    portal.gameObject.SetActive(true);
-        //}
+		if (_currentPortalIndex == _portalList.Count - 1)
+			_currentPortalIndex = 0;
+		else
+			_currentPortalIndex++;
 
-        private void SetTheAbilityOfPortalCreation(bool canCreatePortal)
-        {
-            this.canCreatePortal = canCreatePortal;
-        }
+		Vector2 diff = _endTouchPosition - (Vector2)createdPortal.transform.position;
 
-        private void OnDisable()
-        {
-            touchInput.Disable();
-            touchPosition.Disable();
-        }
-    }
+		float z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+		createdPortal.transform.rotation = Quaternion.Euler(0, 0, z);
+		// return createdPortal.GetComponent<Portal>();
+	}
+
+	//private void OnTakePortalFromPool(Portal portal)
+	//{
+	//    portal.gameObject.SetActive(true);
+	//}
+
+    //private void OnReturnPortalToPool(Portal portal)
+    //{
+    //    portal.gameObject.SetActive(true);
+    //}
+
+	private void SetTheAbilityOfPortalCreation(bool canCreatePortal)
+	{
+		_canCreatePortal = canCreatePortal;
+	}
+
+	private void OnDisable()
+	{
+		_touchInput.Disable();
+		_touchPosition.Disable();
+	}
 }

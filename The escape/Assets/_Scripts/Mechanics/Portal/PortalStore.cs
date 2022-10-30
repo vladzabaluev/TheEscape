@@ -1,23 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Mechanics.Portal
+public class PortalStore : MonoBehaviour
 {
-    public class PortalStore : MonoBehaviour
-    {
-        public List<Portal> portalList = new List<Portal>();
+	public List<Portal> _portalList = new();
 
-        // Start is called before the first frame update
-        private void Start()
-        {
-            for (int i = 0; i < portalList.Count; i++)
-            {
-                if (i == portalList.Count - 1)
-                    portalList[i].anotherPortal = portalList[0];
-                else
-                    portalList[i].anotherPortal = portalList[i + 1];
-                portalList[i].gameObject.SetActive(false);
-            }
-        }
-    }
+	private void Start()
+	{
+		for (var i = 0; i < _portalList.Count; i++)
+		{
+			if (i == _portalList.Count - 1)
+			{
+				_portalList[i].AnotherPortal = _portalList[0];
+			}
+			else
+			{
+				_portalList[i].AnotherPortal = _portalList[i + 1];
+			}
+
+			_portalList[i].gameObject.SetActive(false);
+		}
+	}
 }

@@ -9,14 +9,15 @@ public class PlayerController : MonoBehaviour
 	[Range(0f, 1f)][SerializeField] private float _deadZoneX = 0.3f;
 	[SerializeField] private MovementController _movementController;
 
-	private float _horizontalSpeed;
 	private PlayerInputActions _playerInputActions;
 	private InputAction _movement;
+
+	private float _horizontalSpeed;
 
 	private void Awake()
 	{
 		_playerInputActions = new PlayerInputActions();
-	
+
 		_movementController = _movementController == null ? GetComponent<MovementController>() : _movementController;
 		if (_movementController == null)
 			Debug.LogError("Player not set to movement controller");
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
 			_horizontalSpeed = _movement.ReadValue<Vector2>().x * _moveSpeed;
 		else
 			_horizontalSpeed = 0f;
-	
+
 		if (_movement.ReadValue<Vector2>().y >= _deadZoneY)
 			DoJump();
 	}
@@ -55,9 +56,9 @@ public class PlayerController : MonoBehaviour
 
 	public void OnLanding()
 	{
-	
+
 	}
-	
+
 	private void DoJump()
 	{
 		_movementController.Jump(_jumpForce);

@@ -8,8 +8,6 @@ public class Trap : MonoBehaviour
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (collision.gameObject.TryGetComponent(out _playerHealthBN))
-		{
 			_playerHealthBN.TakeDamage(_attackDamage);
-		}
 	}
 }
