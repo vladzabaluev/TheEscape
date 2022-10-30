@@ -3,11 +3,11 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
 	[SerializeField] private float _attackDamage;
-	[SerializeField] private PlayerHealthBN _playerHealthBN;
+	[SerializeField] private PlayerHealth _playerHealth;
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.gameObject.TryGetComponent(out _playerHealthBN))
-			_playerHealthBN.TakeDamage(_attackDamage);
+		if (collision.gameObject.TryGetComponent(out _playerHealth))
+			_playerHealth.TakeDamage(_attackDamage);
 	}
 }

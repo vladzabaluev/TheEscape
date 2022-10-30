@@ -1,41 +1,41 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-	public Image Bar;
+	[SerializeField] private float _health;
+	[SerializeField] private float _maxHealth;
 
-	public float Fill;
-	private float _lastDamageTime;
+	public delegate void OnHealthChangedDelegate();
+	public OnHealthChangedDelegate OnHealthChangedCallback;
 
-	private void Start()
+	public float Health => _health;
+	public float MaxHealth => _maxHealth;
+	public bool IsAlive => _health > 0f;
+
+	public void TakeDamage(float damage)
 	{
-		Fill = 1f;
-		_lastDamageTime = Time.time;
-	}
-
-	private void Update()
-	{
-		if (Fill<=0f)
+		if (damage < 0)
 		{
-			Debug.Log("Game Over");
+			throw new ArgumentOutOfRangeException(nameof(damage));
+		}
+
+		_health -= damage;
+		ClampHealth();
+
+		if (!IsAlive)
+		{
+			Debug.Log("Player is died! Game Over!");
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		}
 	}
 
-	private void OnCollisionStay2D(Collision2D collision)
+	private void ClampHealth()
 	{
-		if (collision.gameObject.tag == "Obstacle")
-		{
-			Debug.Log("Game Over");
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-		}
-		else if (collision.gameObject.tag == "Enemy" && Time.time > (_lastDamageTime + 2))
-		{
-			Fill -= 0.34f;
-			Bar.fillAmount = Fill;
-			_lastDamageTime = Time.time;
-		}
+		_health = Mathf.Clamp(_health, 0f, _maxHealth);
+
+		if (OnHealthChangedCallback != null)
+			OnHealthChangedCallback.Invoke();
 	}
 }

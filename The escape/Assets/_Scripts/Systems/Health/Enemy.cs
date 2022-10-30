@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
 	[SerializeField] private float _attackDamage;
 	[SerializeField] private float _defaultAttackCooldown;
-	[SerializeField] private PlayerHealthBN _playerHealthBN;
+	[SerializeField] private PlayerHealth _playerHealth;
 
 	private float _attackCooldown;
 
@@ -20,9 +20,9 @@ public class Enemy : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision2D)
 	{
-		if (collision2D.gameObject.TryGetComponent(out _playerHealthBN) && _attackCooldown <= 0)
+		if (collision2D.gameObject.TryGetComponent(out _playerHealth) && _attackCooldown <= 0)
 		{
-			_playerHealthBN.TakeDamage(_attackDamage);
+			_playerHealth.TakeDamage(_attackDamage);
 			_attackCooldown = _defaultAttackCooldown;
 		}
 	}
