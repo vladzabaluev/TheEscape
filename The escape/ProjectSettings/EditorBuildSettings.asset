@@ -6,12 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Nikita/Startup.unity
-    guid: 7e954aa7e704f30db87a2f49b99d5802
-  - enabled: 1
     path: Assets/Scenes/Nikita/MainMenu.unity
     guid: 6e05ba8b5689694f28640efabfee5e2a
   - enabled: 1
+    path: Assets/Scenes/Nikita/Startup.unity
+    guid: 7e954aa7e704f30db87a2f49b99d5802
+  - enabled: 1
     path: Assets/Scenes/Nikita/Level1.unity
     guid: 7be5b5c974868f5449f5652a839f1f13
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: f3723d863a75ac8c6b3c21e003dfe94b, type: 2}
