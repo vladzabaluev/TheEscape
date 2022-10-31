@@ -4,6 +4,10 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Used for remote asset loading.
+/// </summary>
 public class AssetProvider : ILoadingOperation
 {
 	public string Description => "Assets initialization...";
