@@ -11,6 +11,7 @@ public class LoadingScreen : MonoBehaviour
 	[SerializeField] private Canvas _canvas;
 	[SerializeField] private Slider _progressFill;
 	[SerializeField] private TextMeshProUGUI _loadingInfo;
+	[SerializeField] private TextMeshProUGUI _loadingPercent;
 	[SerializeField] private float _barSpeed;
 
 	private float _targetProgress;
@@ -59,7 +60,10 @@ public class LoadingScreen : MonoBehaviour
 		while (_canvas.enabled)
 		{
 			if (_progressFill.value < _targetProgress)
+			{
 				_progressFill.value += Time.deltaTime * _barSpeed;
+				_loadingPercent.text = $"{Mathf.Floor(_progressFill.value * 100)}%";
+			}
 
 			yield return null;
 		}
