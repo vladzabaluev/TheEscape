@@ -1,9 +1,8 @@
 // ReSharper disable CommentTypo
-
-public class Level1 : Level, IPauseHandler
+public class Level2 : Level, IPauseHandler
 {
-	public override string SceneName => Constants.Scenes.Level1.ToString();
-	public override int LevelIndex => (int)Constants.Scenes.Level1;
+	public override string SceneName => Constants.Scenes.Level2.ToString();
+	public override int LevelIndex => (int)Constants.Scenes.Level2;
 
 	public void Initialize()
 	{
@@ -15,6 +14,6 @@ public class Level1 : Level, IPauseHandler
 
 	void IPauseHandler.SetPaused(bool isPaused)
 	{
-		// TODO Realizovat' pauzu dlya objektov
+		// Realizovat' pauzu dlya objektov2
 	}
 }

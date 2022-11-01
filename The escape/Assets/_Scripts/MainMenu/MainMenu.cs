@@ -68,8 +68,12 @@ public class MainMenu : MonoBehaviour
 
 	}
 
-	private void OnExitBtnClick()
+	private async void OnExitBtnClick()
 	{
-		Application.Quit();
+		bool isConfirmed = await AlertPopup.Instance.
+			AwaitForDecision("Confirm Exit", "Do you want to quit to the game?", "Yes", "No");
+
+		if (isConfirmed)
+			Application.Quit();
 	}
 }

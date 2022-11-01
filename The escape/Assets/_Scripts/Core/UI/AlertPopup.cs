@@ -6,7 +6,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Canvas))]
 public class AlertPopup : MonoBehaviour
 {
+	[SerializeField] private TextMeshProUGUI _title;
 	[SerializeField] private TextMeshProUGUI _message;
+	[SerializeField] private TextMeshProUGUI _acceptText;
+	[SerializeField] private TextMeshProUGUI _cancelText;
 	[SerializeField] private Button _okButton;
 	[SerializeField] private Button _cancelButton;
 
@@ -25,9 +28,12 @@ public class AlertPopup : MonoBehaviour
 		_cancelButton.onClick.AddListener(OnCancelled);
 	}
 
-	public async Task<bool> AwaitForDecision(string text)
+	public async Task<bool> AwaitForDecision(string title, string message, string acceptText, string cancelText)
 	{
-		_message.text = text;
+		_title.text = title;
+		_message.text = message;
+		_acceptText.text = acceptText;
+		_cancelText.text = cancelText;
 		_canvas.enabled = true;
 
 		_taskCompletion = new TaskCompletionSource<bool>();

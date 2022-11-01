@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class Trap : MonoBehaviour
+public class Trap : Enemy
 {
-	[SerializeField] private float _attackDamage;
-	[SerializeField] private PlayerHealth _playerHealth;
-
-	private void OnCollisionEnter2D(Collision2D collision)
+	protected override void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.gameObject.TryGetComponent(out _playerHealth))
-			_playerHealth.TakeDamage(_attackDamage);
+		if (collision.gameObject.TryGetComponent(out PlayerHealth))
+			PlayerHealth.TakeDamage(AttackDamage);
 	}
 }

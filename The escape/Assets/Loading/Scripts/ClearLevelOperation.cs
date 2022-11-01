@@ -20,7 +20,7 @@ public class ClearLevelOperation : ILoadingOperation
 
 		onProgress?.Invoke(0.34f);
 
-		var loadOperation = SceneManager.LoadSceneAsync(Constants.Scenes.MainMenu, LoadSceneMode.Additive);
+		var loadOperation = SceneManager.LoadSceneAsync(Constants.Scenes.MainMenu.ToString(), LoadSceneMode.Additive);
 		while (loadOperation.isDone == false)
 		{
 			await UniTask.Delay(1);

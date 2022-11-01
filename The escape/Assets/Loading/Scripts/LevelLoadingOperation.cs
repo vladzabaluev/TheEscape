@@ -16,7 +16,7 @@ public class LevelLoadingOperation : ILoadingOperation
 	public async UniTask Load(Action<float> onProgress)
 	{
 		onProgress?.Invoke(0.4f);
-		var loadOperation = SceneManager.LoadSceneAsync(Constants.Scenes.Level1, LoadSceneMode.Single);
+		var loadOperation = SceneManager.LoadSceneAsync(Constants.Scenes.Level1.ToString(), LoadSceneMode.Single);
 
 		while (loadOperation.isDone == false)
 		{
@@ -26,7 +26,7 @@ public class LevelLoadingOperation : ILoadingOperation
 
 		// TODO Realizovat' zagruzku urovnya po indeksu
 
-		var scene = SceneManager.GetSceneByName(Constants.Scenes.Level1);
+		var scene = SceneManager.GetSceneByName(Constants.Scenes.Level1.ToString());
 		var level = scene.GetRoot<Level1>();
 		onProgress?.Invoke(0.8f);
 		level.Initialize();

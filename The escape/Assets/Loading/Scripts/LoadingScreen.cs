@@ -31,6 +31,8 @@ public class LoadingScreen : MonoBehaviour
 			await WaitForBarFill();
 		}
 
+
+
 		_canvas.enabled = false;
 	}
 

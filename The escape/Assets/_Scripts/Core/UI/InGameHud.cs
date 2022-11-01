@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class InGameHud : MonoBehaviour
 	private bool _isPaused;
 
 	public event Action QuitGame;
+	public event Action ReloadLevel;
 
 	private void Awake()
 	{
@@ -19,11 +21,12 @@ public class InGameHud : MonoBehaviour
 
 		_healthBarSlider.maxValue = _playerHealth.MaxHealth;
 
-		_playerHealth.HealthChanged += UpdatePlayerHealth;
-		UpdatePlayerHealth();
+		_playerHealth.HealthChanged += OnUpdatePlayerHealth;
+		_playerHealth.PlayerDied += OnPlayerDied;
+		OnUpdatePlayerHealth();
 	}
 
-	private void UpdatePlayerHealth()
+	private void OnUpdatePlayerHealth()
 	{
 		_healthBarSlider.value = _playerHealth.Health;
 	}
@@ -37,10 +40,23 @@ public class InGameHud : MonoBehaviour
 	private async void OnQuitButtonClicked()
 	{
 		OnPauseClicked();
-		bool isConfirmed = await AlertPopup.Instance.AwaitForDecision("Are you sure to quit");
+		bool isConfirmed = await AlertPopup.Instance.AwaitForDecision("Confirm Exit", "Do you want to go to the main menu?", "Yes", "No");
 		OnPauseClicked();
 
 		if (isConfirmed)
+			QuitGame?.Invoke();
+	}
+
+	private async void OnPlayerDied()
+	{
+		OnPauseClicked();
+		bool isConfirmed = await AlertPopup.Instance.
+			AwaitForDecision("Game Over!", "Do you want retry level?", "Yes", "Exit to menu");
+		OnPauseClicked();
+
+		if (isConfirmed)
+			ReloadLevel?.Invoke();
+		else
 			QuitGame?.Invoke();
 	}
 }

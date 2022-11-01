@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float _maxHealth;
 
 	public event Action HealthChanged;
+	public event Action PlayerDied;
 
 	public float Health => _health;
 	public float MaxHealth => _maxHealth;
@@ -31,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
 	{
 		HealthChanged?.Invoke();
 		Debug.Log("Player is died! Game Over!");
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		PlayerDied?.Invoke();
 	}
 
 	private void ClampHealth()
