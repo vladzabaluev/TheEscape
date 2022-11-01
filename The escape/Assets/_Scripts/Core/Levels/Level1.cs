@@ -3,7 +3,6 @@
 public class Level1 : Level, IPauseHandler
 {
 	public override string SceneName => Constants.Scenes.Level1.ToString();
-	public override int LevelIndex => (int)Constants.Scenes.Level1;
 
 	public void Initialize()
 	{

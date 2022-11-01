@@ -1,8 +1,7 @@
 // ReSharper disable CommentTypo
-public class Level_3 : Level, IPauseHandler
+public class Level3 : Level, IPauseHandler
 {
 	public override string SceneName => Constants.Scenes.Level3.ToString();
-	public override int LevelIndex => (int)Constants.Scenes.Level3;
 
 	public void Initialize()
 	{

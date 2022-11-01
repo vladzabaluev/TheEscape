@@ -18,9 +18,11 @@ public class SelectLevel : MonoBehaviour
 
 	private async void OnLevelSelectedClick()
 	{
-		var operations = new Queue<ILoadingOperation>();
 		int.TryParse(_levelNumber.text, out int indexLevel);
-		operations.Enqueue(new LevelLoadingOperation(indexLevel));
+		Constants.Scenes sceneName = (Constants.Scenes)indexLevel;
+
+		var operations = new Queue<ILoadingOperation>();
+		operations.Enqueue(new LevelLoadingOperation(sceneName.ToString()));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
 	}
 }

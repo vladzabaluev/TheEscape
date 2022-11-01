@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
 	protected async void Reload()
 	{
 		var operations = new Queue<ILoadingOperation>();
-		operations.Enqueue(new LevelLoadingOperation(LevelIndex));
+		operations.Enqueue(new LevelLoadingOperation(SceneName));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
 	}
 
