@@ -1,14 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class Level : MonoBehaviour, IPauseHandler
 {
 	[SerializeField] protected InGameHud InGameHud;
 
 	protected bool IsPaused => ProjectContext.Instance.PauseManager.IsPaused;
 
 	public virtual string SceneName => null;
-	public virtual int LevelIndex => 0;
+
+	public virtual void Initialize()
+	{
+		ProjectContext.Instance.PauseManager.Register(this);
+
+		InGameHud.QuitGame += GoToMainMenu;
+		InGameHud.ReloadLevel += Reload;
+	}
 
 	protected async void Reload()
 	{
@@ -23,4 +30,6 @@ public class Level : MonoBehaviour
 		operations.Enqueue(new ClearLevelOperation(SceneName));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
 	}
+
+	void IPauseHandler.SetPaused(bool isPaused) { }
 }

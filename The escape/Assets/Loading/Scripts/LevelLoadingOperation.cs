@@ -16,15 +16,13 @@ public class LevelLoadingOperation : ILoadingOperation
 	public async UniTask Load(Action<float> onProgress)
 	{
 		onProgress?.Invoke(0.4f);
-		var loadOperation = SceneManager.LoadSceneAsync(_sceneName, LoadSceneMode.Single);
 
+		var loadOperation = SceneManager.LoadSceneAsync(_sceneName, LoadSceneMode.Single);
 		while (loadOperation.isDone == false)
 		{
 			await UniTask.Delay(1);
 		}
-		onProgress?.Invoke(0.6f);
-
-		// TODO Realizovat' zagruzku urovnya po indeksu
+		onProgress?.Invoke(0.65f);
 
 		var scene = SceneManager.GetSceneByName(_sceneName);
 

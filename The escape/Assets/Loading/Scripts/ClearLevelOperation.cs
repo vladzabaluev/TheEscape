@@ -15,7 +15,6 @@ public class ClearLevelOperation : ILoadingOperation
 
 	public async UniTask Load(Action<float> onProgress)
 	{
-		// ReSharper disable once CommentTypo
 		// TODO Zdes' mozhno dobavit' ochistku sceni i vigruzku igrovih objektov
 
 		onProgress?.Invoke(0.34f);

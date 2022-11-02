@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AppStartup : MonoBehaviour
 {
-	private LoadingScreenProvider LoadingProvider => ProjectContext.Instance.LoadingScreenProvider;
+	//private LoadingScreenProvider LoadingProvider => ProjectContext.Instance.LoadingScreenProvider;
 
 	private async void Start()
 	{
@@ -15,6 +15,6 @@ public class AppStartup : MonoBehaviour
 		loadingOperations.Enqueue(new ConfigOperation(appInfoContainer));
 		loadingOperations.Enqueue(new MenuLoadingOperation());
 
-		await LoadingProvider.LoadAndDestroy(loadingOperations);
+		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(loadingOperations);
 	}
 }
