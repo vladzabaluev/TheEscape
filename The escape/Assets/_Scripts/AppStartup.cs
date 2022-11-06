@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class AppStartup : MonoBehaviour
 {
-	//private LoadingScreenProvider LoadingProvider => ProjectContext.Instance.LoadingScreenProvider;
+	private JsonSaveSystem _saveSystem;
 
 	private async void Start()
 	{
 		ProjectContext.Instance.Initialize();
+		_saveSystem = new JsonSaveSystem();
 
-		var appInfoContainer = new AppInfoContainer();
+		ProjectContext.Instance.AppInfo = _saveSystem.Load();
+
 		var loadingOperations = new Queue<ILoadingOperation>();
-		//loadingOperations.Enqueue(new LoginOperation(appInfoContainer));
-		loadingOperations.Enqueue(new ConfigOperation(appInfoContainer));
+		loadingOperations.Enqueue(new ConfigOperation());
 		loadingOperations.Enqueue(new MenuLoadingOperation());
 
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(loadingOperations);

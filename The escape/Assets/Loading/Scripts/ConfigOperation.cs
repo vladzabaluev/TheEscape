@@ -8,9 +8,9 @@ public class ConfigOperation : ILoadingOperation
 
 	private AppInfoContainer _appInfoContainer;
 
-	public ConfigOperation(AppInfoContainer appInfoContainer)
+	public ConfigOperation()
 	{
-		_appInfoContainer = appInfoContainer;
+		
 	}
 
 	public async UniTask Load(Action<float> onProgress)
