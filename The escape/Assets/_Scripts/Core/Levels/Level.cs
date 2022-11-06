@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Level : MonoBehaviour, IPauseHandler
 {
-	[SerializeField] protected InGameHud InGameHud;
+	[SerializeField] private InGameHud InGameHud;
 
-	protected bool IsPaused => ProjectContext.Instance.PauseManager.IsPaused;
+	private bool IsPaused => ProjectContext.Instance.PauseManager.IsPaused;
 
 	public virtual string SceneName => null;
 
@@ -13,21 +15,29 @@ public class Level : MonoBehaviour, IPauseHandler
 	{
 		ProjectContext.Instance.PauseManager.Register(this);
 
+		InGameHud.LoadNextLevel += GoToNextLevel;
 		InGameHud.QuitGame += GoToMainMenu;
 		InGameHud.ReloadLevel += Reload;
 	}
 
-	protected async void Reload()
+	private async void Reload()
 	{
 		var operations = new Queue<ILoadingOperation>();
 		operations.Enqueue(new LevelLoadingOperation(SceneName));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
 	}
 
-	protected async void GoToMainMenu()
+	private async void GoToMainMenu()
 	{
 		var operations = new Queue<ILoadingOperation>();
 		operations.Enqueue(new ClearLevelOperation(SceneName));
+		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
+	}
+
+	private async void GoToNextLevel(string sceneName)
+	{
+		var operations = new Queue<ILoadingOperation>();
+		operations.Enqueue(new LevelLoadingOperation(sceneName));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
 	}
 

@@ -5,14 +5,6 @@ public class Level4 : Level, IPauseHandler
 {
 	public override string SceneName => Constants.Scenes.Level4.ToString();
 
-	public override void Initialize()
-	{
-		ProjectContext.Instance.PauseManager.Register(this);
-
-		InGameHud.QuitGame += GoToMainMenu;
-		InGameHud.ReloadLevel += Reload;
-	}
-
 	void IPauseHandler.SetPaused(bool isPaused)
 	{
 		if (isPaused)
