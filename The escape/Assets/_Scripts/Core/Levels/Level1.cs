@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Level1 : Level, IPauseHandler
 {
-	public override string SceneName => Constants.Scenes.Level1.ToString();
+	public override Constants.Scenes SceneName => Constants.Scenes.Level1;
 
 	void IPauseHandler.SetPaused(bool isPaused)
 	{

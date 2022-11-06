@@ -1,9 +1,16 @@
+using System;
 using UnityEngine;
 
 public class CompleteLevelTrigger : MonoBehaviour
 {
 	[SerializeField] private Level _level;
-	[SerializeField] private string _nextLevel;
+
+	private string _nextLevel;
+
+	private void Start()
+	{
+		_nextLevel = ((Constants.Scenes)((int)_level.SceneName + 1)).ToString();
+	}
 
 	private void OnTriggerEnter2D(Collider2D col)
 	{

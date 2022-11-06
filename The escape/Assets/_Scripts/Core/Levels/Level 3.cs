@@ -1,9 +1,8 @@
 using UnityEngine;
-// ReSharper disable CommentTypo
 
 public class Level3 : Level, IPauseHandler
 {
-	public override string SceneName => Constants.Scenes.Level3.ToString();
+	public override Constants.Scenes SceneName => Constants.Scenes.Level3;
 
 	void IPauseHandler.SetPaused(bool isPaused)
 	{
@@ -11,7 +10,5 @@ public class Level3 : Level, IPauseHandler
 			Debug.Log("Level 3 is paused");
 		else
 			Debug.Log("Level 3 is unpaused");
-
-		// Realizovat' pauzu dlya objektov3
 	}
 }
