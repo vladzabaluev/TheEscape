@@ -1,0 +1,2 @@
+Package Manager → Выбрать Packages: Unity Registry → Addressables
+Package Manager → плюсик слева в углу → Add package from git URL... → https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask

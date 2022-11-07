@@ -10,6 +10,15 @@
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
 
+# My ignore files
+HealthHeartSystem/
+HealthHeartSystem.meta
+Slick.physicsMaterial2D.meta~merged
+Clean Vector Icons/
+Clean Vector Icons.meta
+loadingBar/
+loadingBar.meta
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
@@ -25,6 +34,10 @@
 
 # Visual Studio cache directory
 .vs/
+.vsconfig
+
+# JetBrains Rider cache directory
+.idea/
 
 # Gradle cache directory
 .gradle/
