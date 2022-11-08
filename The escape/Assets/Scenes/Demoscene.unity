@@ -865,6 +865,7 @@ GameObject:
   - component: {fileID: 315213159}
   - component: {fileID: 315213158}
   - component: {fileID: 315213160}
+  - component: {fileID: 315213162}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -957,6 +958,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddce84052a3db1841b18936841a45c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &315213162
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315213157}
+  m_CullTransparentMesh: 1
 --- !u!1 &370968157
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,6 +3472,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2123128534873030420, guid: f32bf92eb961a90a28ac046e36b42745, type: 3}
   m_PrefabInstance: {fileID: 1165528415}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1468604384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468604369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65dd8a448e96079448706ab0d75cd242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _portal: {fileID: 5665126809752542342, guid: 8f91a1dca0ee7b146957ce4ddabf78b7, type: 3}
+  _maxPortalCount: 2
+--- !u!114 &1468604385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468604369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0bf275331680b4ca60cf9b9f99a719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _portalList: []
 --- !u!1 &1534826580
 GameObject:
   m_ObjectHideFlags: 0
