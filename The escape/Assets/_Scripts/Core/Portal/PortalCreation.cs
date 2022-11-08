@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PortalCreation : MonoBehaviour
@@ -85,6 +86,10 @@ public class PortalCreation : MonoBehaviour
 
 	private void CheckSpawnZone()
 	{
+		Debug.Log(_startTouchPosition);
+		Debug.Log(_endTouchPosition);
+		_mainCamera.ScreenPointToRay(_startTouchPosition);
+
 		_startTouchPosition = _mainCamera.ScreenToWorldPoint(_startTouchPosition);
 		_endTouchPosition = _mainCamera.ScreenToWorldPoint(_endTouchPosition);
 
@@ -117,10 +122,10 @@ public class PortalCreation : MonoBehaviour
 	//    portal.gameObject.SetActive(true);
 	//}
 
-    //private void OnReturnPortalToPool(Portal portal)
-    //{
-    //    portal.gameObject.SetActive(true);
-    //}
+	//private void OnReturnPortalToPool(Portal portal)
+	//{
+	//    portal.gameObject.SetActive(true);
+	//}
 
 	private void SetTheAbilityOfPortalCreation(bool canCreatePortal)
 	{
