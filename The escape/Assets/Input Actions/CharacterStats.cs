@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public int maxHealth;
-    public int damage;
-    public GameObject healthBar;
-    private HealthBar bar;
-    int currentHealth;
+	public int maxHealth;
+	public int damage;
 
-    private void Awake()
-    {
-        currentHealth = maxHealth;
-    }
+	public HealthBar bar;
+	private int currentHealth;
 
-    public virtual void Die()
-    {
-    }
+	private void Awake()
+	{
+		currentHealth = maxHealth;
+	}
 
-    private void Start()
-    {
-        bar = healthBar.GetComponent<HealthBar>();
-        bar.SetMaxHealth(maxHealth);
-    }
+	public virtual void Die()
+	{
+	}
 
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        bar.SetHealth(currentHealth);
-        if (currentHealth <= 0) Die();
-    }
+	private void Start()
+	{
+		bar.SetMaxHealth(maxHealth);
+	}
+
+	public void TakeDamage(int damage)
+	{
+		currentHealth -= damage;
+
+		bar.SetHealth(currentHealth);
+		if (currentHealth <= 0) Die();
+	}
 }

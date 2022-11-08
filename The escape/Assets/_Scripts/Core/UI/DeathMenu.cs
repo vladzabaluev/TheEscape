@@ -2,11 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class DeathMenu : MonoBehaviour
 {
-	[SerializeField] private GameObject _pauseMenu;
+	[SerializeField] private GameObject _deathMenu;
 	[SerializeField] private GameObject _settings;
-	[SerializeField] private Button _continueButton;
+
 	[SerializeField] private Button _restartButton;
 	[SerializeField] private Button _lastCheckpointButton;
 	[SerializeField] private Button _settingsButton;
@@ -21,34 +21,26 @@ public class PauseMenu : MonoBehaviour
 
 	private void Start()
 	{
-		_continueButton.onClick.AddListener(OnContinueClick);
 		_restartButton.onClick.AddListener(OnRestartClick);
 		_lastCheckpointButton.onClick.AddListener(OnLastCheckpointClick);
 		_settingsButton.onClick.AddListener(OnSettingsClick);
 		_exitButton.onClick.AddListener(OnExitMenuClicked);
 		_confirmSettingsButton.onClick.AddListener(OnConfirmClicked);
 
-		_pauseMenu.SetActive(false);
+		_deathMenu.SetActive(false);
 		_settings.SetActive(false);
 	}
 
 	public void PauseGame()
 	{
 		PauseManager.SetPaused(true);
-		_pauseMenu.SetActive(true);
-	}
-
-	private void OnContinueClick()
-	{
-		PauseManager.SetPaused(false);
-
-		_pauseMenu.SetActive(false);
+		_deathMenu.SetActive(true);
 	}
 
 	private void OnRestartClick()
 	{
 		RestartLevel?.Invoke();
-		_pauseMenu.SetActive(false);
+		_deathMenu.SetActive(false);
 	}
 
 	private void OnLastCheckpointClick()
@@ -58,13 +50,13 @@ public class PauseMenu : MonoBehaviour
 
 	private void OnSettingsClick()
 	{
-		_pauseMenu.SetActive(false);
+		_deathMenu.SetActive(false);
 		_settings.SetActive(true);
 	}
 
 	private void OnConfirmClicked()
 	{
-		_pauseMenu.SetActive(true);
+		_deathMenu.SetActive(true);
 		_settings.SetActive(false);
 	}
 
@@ -78,7 +70,7 @@ public class PauseMenu : MonoBehaviour
 		if (isConfirmed)
 		{
 			ExitMenu?.Invoke();
-			_pauseMenu.SetActive(false);
+			_deathMenu.SetActive(false);
 		}
 	}
 }

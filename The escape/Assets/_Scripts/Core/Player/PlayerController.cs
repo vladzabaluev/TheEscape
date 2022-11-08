@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
+		//if (ProjectContext.Instance.PauseManager.IsPaused)
+		//	return;
 		if (Mathf.Abs(_movement.ReadValue<Vector2>().x) >= _deadZoneX)
 			_horizontalSpeed = _movement.ReadValue<Vector2>().x * _moveSpeed;
 		else
@@ -56,7 +58,6 @@ public class PlayerController : MonoBehaviour
 
 	public void OnLanding()
 	{
-
 	}
 
 	private void DoJump()

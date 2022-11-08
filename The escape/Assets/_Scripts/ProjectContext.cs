@@ -9,7 +9,16 @@ public class ProjectContext : MonoBehaviour
 
 	private void Awake()
 	{
-		Instance = this;
+		if (Instance == null)
+		{ // Ёкземпл€р менеджера был найден
+			Instance = this; // «адаем ссылку на экземпл€р объекта
+			Initialize();
+		}
+		else
+		{ // Ёкземпл€р объекта уже существует на сцене
+			Destroy(this.gameObject); // ”дал€ем объект
+		}
+		//Instance = this;
 		DontDestroyOnLoad(this);
 	}
 

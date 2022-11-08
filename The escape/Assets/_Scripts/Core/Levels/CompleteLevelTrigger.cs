@@ -6,6 +6,7 @@ public class CompleteLevelTrigger : MonoBehaviour
 	[SerializeField] private Level _level;
 
 	private string _nextLevel;
+	[SerializeField] private WinMenu _winMenu;
 
 	private void Start()
 	{
@@ -14,7 +15,10 @@ public class CompleteLevelTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.gameObject.TryGetComponent(out PlayerHealth _))
-			_level.LevelComplete(_nextLevel);
+		if (col.gameObject.TryGetComponent(out PlayerStats _))
+		{
+			_winMenu.OnLevelComplete(_nextLevel);
+			_level.LevelComplete();
+		}
 	}
 }

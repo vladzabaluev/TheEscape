@@ -16,10 +16,7 @@ public class Constants
 	public enum Scenes
 	{
 		MainMenu,
-		Level1,
-		Level2,
-		Level3,
-		Level4,
-		Level5
+		Demoscene,
+		NextLevel
 	}
 }

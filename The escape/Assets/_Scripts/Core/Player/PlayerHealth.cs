@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float _maxHealth;
 
 	public event Action HealthChanged;
+
 	public event Action PlayerDied;
 
 	public float Health => _health;

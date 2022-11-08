@@ -1,70 +1,72 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class WinMenu : MonoBehaviour
 {
-	[SerializeField] private GameObject _pauseMenu;
+	[SerializeField] private GameObject _levelCompleteMenu;
 	[SerializeField] private GameObject _settings;
-	[SerializeField] private Button _continueButton;
+	[SerializeField] private Button _nextLevelButton;
 	[SerializeField] private Button _restartButton;
-	[SerializeField] private Button _lastCheckpointButton;
 	[SerializeField] private Button _settingsButton;
 	[SerializeField] private Button _exitButton;
 	[SerializeField] private Button _confirmSettingsButton;
 
 	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
 
+	public event Action<string> NextLevel;
+
 	public event Action RestartLevel;
 
 	public event Action ExitMenu;
 
+	private string nextLevelName;
+
 	private void Start()
 	{
-		_continueButton.onClick.AddListener(OnContinueClick);
+		_nextLevelButton.onClick.AddListener(OnNextLevelClick);
 		_restartButton.onClick.AddListener(OnRestartClick);
-		_lastCheckpointButton.onClick.AddListener(OnLastCheckpointClick);
+
 		_settingsButton.onClick.AddListener(OnSettingsClick);
 		_exitButton.onClick.AddListener(OnExitMenuClicked);
 		_confirmSettingsButton.onClick.AddListener(OnConfirmClicked);
 
-		_pauseMenu.SetActive(false);
+		_levelCompleteMenu.SetActive(false);
 		_settings.SetActive(false);
 	}
 
-	public void PauseGame()
+	public void OnLevelComplete(string nextLevel)
 	{
+		Debug.Log("com");
 		PauseManager.SetPaused(true);
-		_pauseMenu.SetActive(true);
+		nextLevelName = nextLevel;
+		_levelCompleteMenu.SetActive(true);
 	}
 
-	private void OnContinueClick()
+	private void OnNextLevelClick()
 	{
-		PauseManager.SetPaused(false);
+		NextLevel.Invoke(nextLevelName);
 
-		_pauseMenu.SetActive(false);
+		_levelCompleteMenu.SetActive(false);
 	}
 
 	private void OnRestartClick()
 	{
 		RestartLevel?.Invoke();
-		_pauseMenu.SetActive(false);
-	}
-
-	private void OnLastCheckpointClick()
-	{
-		Debug.Log("Restart from last Checkpoint");
+		_levelCompleteMenu.SetActive(false);
 	}
 
 	private void OnSettingsClick()
 	{
-		_pauseMenu.SetActive(false);
+		_levelCompleteMenu.SetActive(false);
 		_settings.SetActive(true);
 	}
 
 	private void OnConfirmClicked()
 	{
-		_pauseMenu.SetActive(true);
+		_levelCompleteMenu.SetActive(true);
 		_settings.SetActive(false);
 	}
 
@@ -78,7 +80,7 @@ public class PauseMenu : MonoBehaviour
 		if (isConfirmed)
 		{
 			ExitMenu?.Invoke();
-			_pauseMenu.SetActive(false);
+			_levelCompleteMenu.SetActive(false);
 		}
 	}
 }

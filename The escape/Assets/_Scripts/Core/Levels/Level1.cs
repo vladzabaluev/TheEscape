@@ -1,9 +1,11 @@
 using UnityEngine;
+
 // ReSharper disable CommentTypo
 
 public class Level1 : Level, IPauseHandler
+
 {
-	public override Constants.Scenes SceneName => Constants.Scenes.Level1;
+	public override Constants.Scenes SceneName => Constants.Scenes.Demoscene;
 
 	void IPauseHandler.SetPaused(bool isPaused)
 	{

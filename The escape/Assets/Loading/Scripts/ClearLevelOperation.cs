@@ -1,6 +1,8 @@
 using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+
 // ReSharper disable CommentTypo
 
 public class ClearLevelOperation : ILoadingOperation
@@ -25,7 +27,7 @@ public class ClearLevelOperation : ILoadingOperation
 			await UniTask.Delay(1);
 		}
 		onProgress?.Invoke(0.66f);
-
+		Debug.Log(_sceneName);
 		var unloadOperation = SceneManager.UnloadSceneAsync(_sceneName);
 		while (unloadOperation.isDone == false)
 		{

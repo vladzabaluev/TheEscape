@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class ObstacleTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        CharacterStats charStats = collision.gameObject.GetComponent<CharacterStats>();
-        if(charStats!=null)
-        {
-            charStats.TakeDamage(charStats.maxHealth);
-        }    
-    }
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.TryGetComponent<CharacterStats>(out CharacterStats characterStats))
+		{
+			characterStats.TakeDamage(characterStats.maxHealth);
+		}
+	}
 }

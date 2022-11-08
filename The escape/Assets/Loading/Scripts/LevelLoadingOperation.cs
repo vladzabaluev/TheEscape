@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelLoadingOperation : ILoadingOperation
 {
 	private readonly string _sceneName;
-	public string Description => $"Loading {_sceneName} level..." ;
+	public string Description => $"Loading {_sceneName} level...";
 
 	public LevelLoadingOperation(string sceneName)
 	{
@@ -27,35 +27,35 @@ public class LevelLoadingOperation : ILoadingOperation
 
 		switch (_sceneName)
 		{
-			case "Level1":
+			case "Demoscene":
 				var level1 = scene.GetRoot<Level1>();
 				onProgress?.Invoke(0.8f);
-				level1.Initialize();
+				//level1.Initialize();
 				break;
 
-			case "Level2":
+			case "NextLevel":
 				var level2 = scene.GetRoot<Level2>();
 				onProgress?.Invoke(0.8f);
-				level2.Initialize();
+				//level2.Initialize();
 				break;
 
-			case "Level3":
-				var level3 = scene.GetRoot<Level3>();
-				onProgress?.Invoke(0.8f);
-				level3.Initialize();
-				break;
+				//case "Level3":
+				//	var level3 = scene.GetRoot<Level3>();
+				//	onProgress?.Invoke(0.8f);
+				//	level3.Initialize();
+				//	break;
 
-			case "Level4":
-				var level4 = scene.GetRoot<Level4>();
-				onProgress?.Invoke(0.8f);
-				level4.Initialize();
-				break;
+				//case "Level4":
+				//	var level4 = scene.GetRoot<Level4>();
+				//	onProgress?.Invoke(0.8f);
+				//	level4.Initialize();
+				//	break;
 
-			case "Level5":
-				var level5 = scene.GetRoot<Level5>();
-				onProgress?.Invoke(0.8f);
-				level5.Initialize();
-				break;
+				//case "Level5":
+				//	var level5 = scene.GetRoot<Level5>();
+				//	onProgress?.Invoke(0.8f);
+				//	level5.Initialize();
+				//	break;
 		}
 
 		onProgress?.Invoke(1.0f);
