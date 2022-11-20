@@ -5,9 +5,9 @@ public class Portal : MonoBehaviour
 	[SerializeField] private float _minDistanceToTeleportAgain = 1f;
 
 	private static bool s_isTeleported;
+	public bool IsActivePortal = true;
 
 	public Portal AnotherPortal;
-	public bool IsActivePortal = true;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

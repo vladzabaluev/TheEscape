@@ -7,7 +7,7 @@ public class PortalStore : MonoBehaviour
 
 	private void Start()
 	{
-		for (var i = 0; i < _portalList.Count; i++)
+		for (int i = 0; i < _portalList.Count; i++)
 		{
 			if (i == _portalList.Count - 1)
 			{

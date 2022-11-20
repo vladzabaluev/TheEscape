@@ -3,10 +3,9 @@ using UnityEngine;
 public class Teleportation : MonoBehaviour
 {
 	private static bool s_isTeleported;
+	public bool IsActivePortal = true;
 
 	public GameObject PointTeleport;
-
-	public bool IsActivePortal = true;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

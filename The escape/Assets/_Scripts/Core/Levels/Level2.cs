@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Level2 : Level, IPauseHandler
@@ -9,10 +7,14 @@ public class Level2 : Level, IPauseHandler
 	void IPauseHandler.SetPaused(bool isPaused)
 	{
 		if (isPaused)
-			Debug.Log("Level 1 is paused");
+		{
+			Debug.Log("Level 2 is paused");
+			Time.timeScale = 0;
+		}
 		else
-			Debug.Log("Level 1 is unpaused");
-
-		// TODO Realizovat' pauzu dlya objektov
+		{
+			Debug.Log("Level 2 is unpaused");
+			Time.timeScale = 1;
+		}
 	}
 }

@@ -17,15 +17,14 @@ public class Level : MonoBehaviour, IPauseHandler
 	private void Start()
 	{
 		if (Instance == null)
-		{ // Ёкземпл€р менеджера был найден
-			Instance = this; // «адаем ссылку на экземпл€р объекта
+		{
+			Instance = this;
 			Initialize();
 		}
 		else
-		{ // Ёкземпл€р объекта уже существует на сцене
-			Destroy(this.gameObject); // ”дал€ем объект
+		{
+			Destroy(gameObject);
 		}
-		//Instance = this;
 	}
 
 	public void Initialize()
@@ -50,36 +49,24 @@ public class Level : MonoBehaviour, IPauseHandler
 
 	public void LevelComplete()
 	{
-		//PauseManager.SetPaused(true);
-		//bool isConfirmed = await AlertPopup.Instance.
-		//	AwaitForDecision("Level Completed!", "Do you want to go to the next level?", "Yes", "Exit to menu");
-		//PauseManager.SetPaused(false);
-
 		if (ProjectContext.Instance.AppInfo.UnlockedLevelsCount <= (int)SceneName)
 		{
 			ProjectContext.Instance.AppInfo.UnlockedLevelsCount++;
 			_saveSystem.Save(ProjectContext.Instance.AppInfo);
 		}
-
-		//if (isConfirmed)
-		//	GoToNextLevel(sceneName);
-		//else
-		//	GoToMainMenu();
 	}
 
 	private async void Restart()
 	{
-		Debug.Log("lvl restart");
+		PauseManager.SetPaused(false);
 		var operations = new Queue<ILoadingOperation>();
 		operations.Enqueue(new LevelLoadingOperation(SceneName.ToString()));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
 	}
 
-	private int a = 0;
-
 	private async void GoToMainMenu()
 	{
-		Debug.Log(a++);
+		PauseManager.SetPaused(false);
 		var operations = new Queue<ILoadingOperation>();
 		operations.Enqueue(new ClearLevelOperation(SceneName.ToString()));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
@@ -87,6 +74,7 @@ public class Level : MonoBehaviour, IPauseHandler
 
 	private async void GoToNextLevel(string sceneName)
 	{
+		PauseManager.SetPaused(false);
 		var operations = new Queue<ILoadingOperation>();
 		operations.Enqueue(new LevelLoadingOperation(sceneName));
 		await ProjectContext.Instance.LoadingScreenProvider.LoadAndDestroy(operations);
@@ -94,15 +82,7 @@ public class Level : MonoBehaviour, IPauseHandler
 
 	private void OnPlayerDied()
 	{
-		//PauseManager.SetPaused(true);
-		//bool isConfirmed = await AlertPopup.Instance.
-		//	AwaitForDecision("Game Over!", "Do you want retry level?", "Yes", "Exit to menu");
-		//PauseManager.SetPaused(false);
 		_deathMenu.PauseGame();
-		//if (isConfirmed)
-		//	Restart();
-		//else
-		//	GoToMainMenu();
 	}
 
 	private void OnDisable()

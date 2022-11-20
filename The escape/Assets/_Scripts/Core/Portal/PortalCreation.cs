@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class PortalCreation : MonoBehaviour
+public class PortalCreation : MonoBehaviour, IPauseHandler
 {
 	[SerializeField] private GameObject _portal;
 	[SerializeField] private int _maxPortalCount;
@@ -23,10 +22,13 @@ public class PortalCreation : MonoBehaviour
 	private float _portalLength;
 	private bool _canCreatePortal = true;
 
+	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
+
 	private void Awake()
 	{
 		_inputActions = new PlayerInputActions();
 		_mainCamera = Camera.main;
+		PauseManager.Register(this);
 
 		// Get extreme portal point and save info about portal's length.
 		_portalLength = Vector3.Distance(_portal.transform.position, _portal.transform.GetChild(0).position);
@@ -48,17 +50,14 @@ public class PortalCreation : MonoBehaviour
 
 	private void Start()
 	{
-		for (var i = 0; i < _maxPortalCount; i++)
+		for (int i = 0; i < _maxPortalCount; i++)
 		{
 			GameObject createdPortal = Instantiate(_portal, transform.position, Quaternion.identity);
 			_portalList.Add(createdPortal.GetComponent<Portal>());
 		}
-		Debug.Log(_portalList.Count);
 
-		for (var i = 0; i < _portalList.Count; i++)
+		for (int i = 0; i < _portalList.Count; i++)
 		{
-			Debug.Log(_portalList[i].gameObject.name);
-
 			if (i == _portalList.Count - 1)
 			{
 				_portalList[i].AnotherPortal = _portalList[0];
@@ -86,8 +85,6 @@ public class PortalCreation : MonoBehaviour
 
 	private void CheckSpawnZone()
 	{
-		Debug.Log(_startTouchPosition);
-		Debug.Log(_endTouchPosition);
 		_mainCamera.ScreenPointToRay(_startTouchPosition);
 
 		_startTouchPosition = _mainCamera.ScreenToWorldPoint(_startTouchPosition);
@@ -114,18 +111,7 @@ public class PortalCreation : MonoBehaviour
 
 		float z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 		createdPortal.transform.rotation = Quaternion.Euler(0, 0, z);
-		// return createdPortal.GetComponent<Portal>();
 	}
-
-	//private void OnTakePortalFromPool(Portal portal)
-	//{
-	//    portal.gameObject.SetActive(true);
-	//}
-
-	//private void OnReturnPortalToPool(Portal portal)
-	//{
-	//    portal.gameObject.SetActive(true);
-	//}
 
 	private void SetTheAbilityOfPortalCreation(bool canCreatePortal)
 	{
@@ -136,5 +122,11 @@ public class PortalCreation : MonoBehaviour
 	{
 		_touchInput.Disable();
 		_touchPosition.Disable();
+		PauseManager.UnRegister(this);
+	}
+
+	void IPauseHandler.SetPaused(bool isPaused)
+	{
+		_canCreatePortal = !isPaused;
 	}
 }

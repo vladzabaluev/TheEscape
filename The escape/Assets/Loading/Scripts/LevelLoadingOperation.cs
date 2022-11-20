@@ -25,38 +25,9 @@ public class LevelLoadingOperation : ILoadingOperation
 
 		var scene = SceneManager.GetSceneByName(_sceneName);
 
-		switch (_sceneName)
-		{
-			case "Demoscene":
-				var level1 = scene.GetRoot<Level1>();
-				onProgress?.Invoke(0.8f);
-				//level1.Initialize();
-				break;
-
-			case "NextLevel":
-				var level2 = scene.GetRoot<Level2>();
-				onProgress?.Invoke(0.8f);
-				//level2.Initialize();
-				break;
-
-				//case "Level3":
-				//	var level3 = scene.GetRoot<Level3>();
-				//	onProgress?.Invoke(0.8f);
-				//	level3.Initialize();
-				//	break;
-
-				//case "Level4":
-				//	var level4 = scene.GetRoot<Level4>();
-				//	onProgress?.Invoke(0.8f);
-				//	level4.Initialize();
-				//	break;
-
-				//case "Level5":
-				//	var level5 = scene.GetRoot<Level5>();
-				//	onProgress?.Invoke(0.8f);
-				//	level5.Initialize();
-				//	break;
-		}
+		var level1 = scene.GetRoot<Level1>();
+		onProgress?.Invoke(0.8f);
+		//level1.Initialize();
 
 		onProgress?.Invoke(1.0f);
 	}

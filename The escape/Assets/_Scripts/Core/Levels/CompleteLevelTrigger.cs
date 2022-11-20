@@ -4,9 +4,9 @@ using UnityEngine;
 public class CompleteLevelTrigger : MonoBehaviour
 {
 	[SerializeField] private Level _level;
+	[SerializeField] private WinMenu _winMenu;
 
 	private string _nextLevel;
-	[SerializeField] private WinMenu _winMenu;
 
 	private void Start()
 	{

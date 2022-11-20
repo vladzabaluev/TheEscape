@@ -3,10 +3,7 @@ using UnityEngine.UI;
 
 public class InGameHud : MonoBehaviour
 {
-	//[SerializeField] private Slider _healthBarSlider;
 	[SerializeField] private Button _pauseButton;
-
-	//[SerializeField] private PlayerHealth _playerHealth;
 	[SerializeField] private PauseMenu _pauseMenu;
 
 	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
