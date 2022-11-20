@@ -7,16 +7,24 @@ public class JsonSaveSystem
 
 	public JsonSaveSystem()
 	{
-		_filePath = Path.Combine(Application.streamingAssetsPath, "PlayerSaves.json");
+		_filePath = Path.Combine(Application.persistentDataPath, "PlayerSaves.json");
+		if (File.Exists(_filePath))
+			return;
+
+		FileStream fs = File.Create(_filePath);
+		fs.Dispose();
+		AppInfoContainer newData = new()
+		{
+			UnlockedLevelsCount = 1
+		};
+		Save(newData);
 	}
 
 	public void Save(AppInfoContainer data)
 	{
-		var json = JsonUtility.ToJson(data);
-		using (var writer = new StreamWriter(_filePath))
-		{
-			writer.WriteLine(json);
-		}
+		string json = JsonUtility.ToJson(data);
+		using var writer = new StreamWriter(_filePath);
+		writer.WriteLine(json);
 	}
 
 	public AppInfoContainer Load()

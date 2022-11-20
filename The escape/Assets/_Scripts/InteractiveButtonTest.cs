@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InteractiveButtonTest : MonoBehaviour
@@ -9,11 +10,19 @@ public class InteractiveButtonTest : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI _textMeshPro;
 
 	private PlayerInputActions _playerInputActions;
+	private InputAction _touchInput;
+	private InputAction _touchPosition;
+
+	private Vector2 _startTouchPosition;
+	private Vector2 _endTouchPosition;
+	private Camera _mainCamera;
+
 	private float _level;
 
 	private void Awake()
 	{
 		_playerInputActions = new PlayerInputActions();
+		_mainCamera = Camera.main;
 
 		_button.onClick.AddListener(OnClick);
 
@@ -24,12 +33,49 @@ public class InteractiveButtonTest : MonoBehaviour
 	private void OnEnable()
 	{
 		_playerInputActions.UI.Enable();
+		_playerInputActions.GameProcess.Enable();
+
+		_touchInput = _playerInputActions.GameProcess.TouchInput;
+		_touchPosition = _playerInputActions.GameProcess.TouchPosition;
+
+		_touchInput.performed += SaveStartTouchPosition;
+		_touchInput.canceled += SaveEndTouchPosition;
+
+		_touchInput.Enable();
+		_touchPosition.Enable();
+	}
+
+	private void SaveEndTouchPosition(InputAction.CallbackContext obj)
+	{
+
+	}
+
+	private void SaveStartTouchPosition(InputAction.CallbackContext obj)
+	{
+		Debug.Log("Start");
+		//_startTouchPosition = _touchPosition.ReadValue<Vector2>();
+		//Debug.Log(_startTouchPosition);
 	}
 
 	private void OnDisable()
 	{
 		_playerInputActions.UI.Disable();
+		_playerInputActions.GameProcess.Disable();
+		_touchInput.Disable();
+		_touchPosition.Disable();
 	}
+
+	/*private void SaveStartTouchPosition(InputAction.CallbackContext obj)
+	{
+		_startTouchPosition = _touchPosition.ReadValue<Vector2>();
+		Debug.Log(_startTouchPosition);
+	}
+
+	private void SaveEndTouchPosition(InputAction.CallbackContext obj)
+	{
+		_endTouchPosition = _touchPosition.ReadValue<Vector2>();
+		Debug.Log(_endTouchPosition);
+	}*/
 
 	private void OnClick()
 	{

@@ -25,6 +25,11 @@ public class LevelLoadingOperation : ILoadingOperation
 
 		var scene = SceneManager.GetSceneByName(_sceneName);
 
+		var level = scene.GetRoot<Level>();
+		onProgress?.Invoke(0.8f);
+		level.Initialize();
+
+		/*
 		switch (_sceneName)
 		{
 			case "Level1":
@@ -56,7 +61,7 @@ public class LevelLoadingOperation : ILoadingOperation
 				onProgress?.Invoke(0.8f);
 				level5.Initialize();
 				break;
-		}
+		}*/
 
 		onProgress?.Invoke(1.0f);
 	}

@@ -18,9 +18,9 @@ public class StupidEnemy : Enemy
 
 	protected override void OnCollisionEnter2D(Collision2D collision2D)
 	{
-		if (collision2D.gameObject.TryGetComponent(out PlayerHealth) && _attackCooldown <= 0)
+		if (collision2D.gameObject.TryGetComponent(out PlayerHealth playerHealth) && _attackCooldown <= 0)
 		{
-			PlayerHealth.TakeDamage(AttackDamage);
+			playerHealth.TakeDamage(AttackDamage);
 			_attackCooldown = _defaultAttackCooldown;
 		}
 	}

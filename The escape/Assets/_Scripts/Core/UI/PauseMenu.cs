@@ -72,9 +72,7 @@ public class PauseMenu : MonoBehaviour
 	{
 		bool isConfirmed = await AlertPopup.Instance.
 			AwaitForDecision("Confirm Exit", "Do you want to go to the main menu?", "Yes", "No");
-		PauseManager.SetPaused(false);
 
-		_pauseMenu.enabled = false;
 		if (isConfirmed)
 			ExitMenu?.Invoke();
 	}

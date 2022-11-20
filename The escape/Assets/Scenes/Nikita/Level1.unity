@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d5d151217945f4bc3a1be53b50b9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHealth: {fileID: 2030482392}
+  AttackDamage: 0
 --- !u!1 &858549319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d75d5bf63b14d2694641319ef74f2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHealth: {fileID: 2030482392}
+  AttackDamage: 0
   _defaultAttackCooldown: 1
 --- !u!61 &886164681
 BoxCollider2D:
