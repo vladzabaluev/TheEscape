@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_playerInputActions = new PlayerInputActions();
 
-		_movementController = _movementController == null ? GetComponent<MovementController>() : _movementController;
+		_movementController ??= GetComponent<MovementController>();
 		if (_movementController == null)
 			Debug.LogError("Player not set to movement controller");
 	}

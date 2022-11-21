@@ -7,7 +7,6 @@ public class PlayerHealth : MonoBehaviour
 	[SerializeField] private float _maxHealth;
 
 	public event Action HealthChanged;
-
 	public event Action PlayerDied;
 
 	public float Health => _health;
@@ -17,9 +16,7 @@ public class PlayerHealth : MonoBehaviour
 	public void TakeDamage(float damage)
 	{
 		if (damage < 0)
-		{
 			throw new ArgumentOutOfRangeException(nameof(damage));
-		}
 
 		_health -= damage;
 		ClampHealth();
