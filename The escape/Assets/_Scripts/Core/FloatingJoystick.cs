@@ -132,7 +132,7 @@ public class FloatingJoystick : OnScreenControl, IPointerDownHandler, IPointerUp
 
 	private IEnumerator JoystickTurningOff()
 	{
-		var alpha = 1f;
+		float alpha = 1f;
 
 		while (_imageOfBackground.color.a >= 0f)
 		{

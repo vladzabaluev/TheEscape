@@ -1,29 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class AIMoving : MonoBehaviour
 {
 
-    [SerializeField] private Transform StartPoint;
-    [SerializeField] private Transform EndPoint;
-    [SerializeField] private float speed = 10;
+    [SerializeField] private Transform _startPoint;
+    [SerializeField] private Transform _endPoint;
+    [SerializeField] private float _speed = 10;
 
-    private bool moveDirecton = true;
+    private bool _moveDirection = true;
 
     void FixedUpdate()
     {
-        if (moveDirecton)
+        if (_moveDirection)
         {
-            transform.position = Vector3.MoveTowards(transform.position, EndPoint.position, speed*Time.fixedDeltaTime);
-            if (transform.position == EndPoint.position) { moveDirecton = false; }
+            transform.position = Vector3.MoveTowards(transform.position, _endPoint.position, _speed * Time.fixedDeltaTime);
+            if (transform.position == _endPoint.position) { _moveDirection = false; }
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, StartPoint.position, speed * Time.fixedDeltaTime);
-            if (transform.position == StartPoint.position) { moveDirecton = true; }
+            transform.position = Vector3.MoveTowards(transform.position, _startPoint.position, _speed * Time.fixedDeltaTime);
+            if (transform.position == _startPoint.position) { _moveDirection = true; }
         }
 
     }

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Teleportation : MonoBehaviour
 {
-	private static bool s_isTeleported;
+	public GameObject PointTeleport;
 	public bool IsActivePortal = true;
 
-	public GameObject PointTeleport;
+	private static bool s_isTeleported;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

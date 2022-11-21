@@ -15,7 +15,6 @@ public class PortalCreation : MonoBehaviour, IPauseHandler
 
 	private Vector2 _startTouchPosition;
 	private Vector2 _endTouchPosition;
-
 	private Camera _mainCamera;
 
 	private int _currentPortalIndex;

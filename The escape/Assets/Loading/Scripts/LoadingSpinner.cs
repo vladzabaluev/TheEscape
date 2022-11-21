@@ -28,21 +28,20 @@ public class LoadingSpinner : MonoBehaviour
 	{
 		float currentSize = _image.fillAmount;
 
-		if (currentSize < .30f && _isIncreasing)
+		switch (currentSize)
 		{
-			_image.fillAmount += _openSpeed;
-		}
-		else if (currentSize >= .30f && _isIncreasing)
-		{
-			_isIncreasing = false;
-		}
-		else if (currentSize >= .02f && !_isIncreasing)
-		{
-			_image.fillAmount -= _closeSpeed;
-		}
-		else if (currentSize < .02f && !_isIncreasing)
-		{
-			_isIncreasing = true;
+			case < 0.30f when _isIncreasing:
+				_image.fillAmount += _openSpeed;
+				break;
+			case >= 0.30f when _isIncreasing:
+				_isIncreasing = false;
+				break;
+			case >= 0.02f when !_isIncreasing:
+				_image.fillAmount -= _closeSpeed;
+				break;
+			case < 0.02f when !_isIncreasing:
+				_isIncreasing = true;
+				break;
 		}
 	}
 }

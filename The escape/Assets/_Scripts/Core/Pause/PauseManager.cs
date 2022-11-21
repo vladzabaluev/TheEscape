@@ -20,8 +20,6 @@ public class PauseManager : IPauseHandler
 	{
 		IsPaused = isPaused;
 		foreach (var handler in _handlers)
-		{
 			handler.SetPaused(isPaused);
-		}
 	}
 }

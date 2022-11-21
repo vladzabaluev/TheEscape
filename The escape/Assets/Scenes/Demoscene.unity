@@ -3793,8 +3793,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038128634}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.71, y: 0.02, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.71, y: 0.01999998, z: 0}
   m_LocalScale: {x: 0.3838, y: 0.7652, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4844,8 +4844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953c6fd5612199943b9825f56ff1555c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  damage: 0
+  MaxHealth: 100
+  Damage: 0
   bar: {fileID: 315213160}
 --- !u!4 &1468604377 stripped
 Transform:
@@ -5682,8 +5682,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bc08d1bf307094f97ff1e8e6c4354b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  damage: 10
+  MaxHealth: 100
+  Damage: 10
   bar: {fileID: 201226232487390349}
 --- !u!61 &1796570794
 BoxCollider2D:
@@ -5987,7 +5987,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860576919}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.06, y: -1.79, z: 0}
   m_LocalScale: {x: 0.3838, y: 0.7652, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6263,9 +6263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab8c172320da274b95789cb47d122c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {fileID: 1860576920}
-  EndPoint: {fileID: 1038128635}
-  speed: 10
+  _startPoint: {fileID: 1860576920}
+  _endPoint: {fileID: 1038128635}
+  _speed: 10
 --- !u!1 &1969391971
 GameObject:
   m_ObjectHideFlags: 0

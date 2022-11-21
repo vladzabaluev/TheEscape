@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,12 +15,10 @@ public class WinMenu : MonoBehaviour
 	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
 
 	public event Action<string> NextLevel;
-
 	public event Action RestartLevel;
-
 	public event Action ExitMenu;
 
-	private string nextLevelName;
+	private string _nextLevelName;
 
 	private void Start()
 	{
@@ -41,14 +37,13 @@ public class WinMenu : MonoBehaviour
 	{
 		Debug.Log("com");
 		PauseManager.SetPaused(true);
-		nextLevelName = nextLevel;
+		_nextLevelName = nextLevel;
 		_levelCompleteMenu.SetActive(true);
 	}
 
 	private void OnNextLevelClick()
 	{
-		NextLevel.Invoke(nextLevelName);
-
+		NextLevel?.Invoke(_nextLevelName);
 		_levelCompleteMenu.SetActive(false);
 	}
 
@@ -74,9 +69,7 @@ public class WinMenu : MonoBehaviour
 	{
 		bool isConfirmed = await AlertPopup.Instance.
 			AwaitForDecision("Confirm Exit", "Do you want to go to the main menu?", "Yes", "No");
-		//PauseManager.SetPaused(false);
 
-		//_pauseMenu.SetActive(false);
 		if (isConfirmed)
 		{
 			ExitMenu?.Invoke();

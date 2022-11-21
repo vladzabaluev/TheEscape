@@ -4,10 +4,10 @@ public class Portal : MonoBehaviour
 {
 	[SerializeField] private float _minDistanceToTeleportAgain = 1f;
 
-	private static bool s_isTeleported;
+	public Portal AnotherPortal;
 	public bool IsActivePortal = true;
 
-	public Portal AnotherPortal;
+	private static bool s_isTeleported;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

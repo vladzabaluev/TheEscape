@@ -1,24 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
 {
-	private EnemyStats stats;
+	private EnemyStats _stats;
 
-	// Start is called before the first frame update
 	private void Start()
 	{
-		stats = gameObject.GetComponent<EnemyStats>();
+		_stats = gameObject.GetComponent<EnemyStats>();
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
+	private void OnCollisionEnter2D(Collision2D collision2D)
 	{
-		PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
-		if (player != null)
+		if (collision2D.gameObject.TryGetComponent(out PlayerStats playerStats))
 		{
-			Debug.Log(stats.damage);
-			player.TakeDamage(stats.damage);
+			Debug.Log(_stats.Damage);
+			playerStats.TakeDamage(_stats.Damage);
 		}
 	}
 }

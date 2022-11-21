@@ -11,14 +11,14 @@ public class Level : MonoBehaviour, IPauseHandler
 	private JsonSaveSystem _saveSystem;
 	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
 
-	private static Level Instance;
+	private static Level s_instance;
 	public virtual Constants.Scenes SceneName => 0;
 
 	private void Start()
 	{
-		if (Instance == null)
+		if (s_instance == null)
 		{
-			Instance = this;
+			s_instance = this;
 			Initialize();
 		}
 		else
@@ -51,8 +51,9 @@ public class Level : MonoBehaviour, IPauseHandler
 	{
 		if (ProjectContext.Instance.AppInfo.UnlockedLevelsCount <= (int)SceneName)
 		{
-			ProjectContext.Instance.AppInfo.UnlockedLevelsCount++;
-			_saveSystem.Save(ProjectContext.Instance.AppInfo);
+			AppInfoContainer data = ProjectContext.Instance.AppInfo;
+			data.UnlockedLevelsCount++;
+			_saveSystem.Save(data);
 		}
 	}
 

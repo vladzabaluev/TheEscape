@@ -16,7 +16,6 @@ public class DeathMenu : MonoBehaviour
 	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
 
 	public event Action RestartLevel;
-
 	public event Action ExitMenu;
 
 	private void Start()
@@ -64,9 +63,7 @@ public class DeathMenu : MonoBehaviour
 	{
 		bool isConfirmed = await AlertPopup.Instance.
 			AwaitForDecision("Confirm Exit", "Do you want to go to the main menu?", "Yes", "No");
-		//PauseManager.SetPaused(false);
 
-		//_pauseMenu.SetActive(false);
 		if (isConfirmed)
 		{
 			ExitMenu?.Invoke();

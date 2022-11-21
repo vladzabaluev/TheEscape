@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: f2dd083f2be771c6493f7eec88b7e6a1
+  m_GUID: 2f7cdd926e39c8241af40340ae773bb8
   m_SerializeEntries:
   - m_GUID: 0d49c916f61786e7cab66295526a4374
     m_Address: LoadingScreen

@@ -36,7 +36,7 @@ public class MovementController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		var wasGrounded = _isGrounded;
+		bool wasGrounded = _isGrounded;
 		_isGrounded = false;
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, _whatIsGround);
 		foreach (Collider2D foundCollider in colliders)

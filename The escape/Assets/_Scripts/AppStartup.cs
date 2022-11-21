@@ -1,17 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AppStartup : MonoBehaviour
 {
-	private JsonSaveSystem _saveSystem;
-
 	private async void Start()
 	{
 		ProjectContext.Instance.Initialize();
-		_saveSystem = new JsonSaveSystem();
-
-		ProjectContext.Instance.AppInfo = _saveSystem.Load();
 
 		var loadingOperations = new Queue<ILoadingOperation>();
 		loadingOperations.Enqueue(new ConfigOperation());

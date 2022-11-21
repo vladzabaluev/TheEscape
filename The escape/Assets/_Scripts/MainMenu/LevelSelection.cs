@@ -9,15 +9,17 @@ public class LevelSelection : MonoBehaviour
 
 	private void Start()
 	{
-		int unlockedLevels = ProjectContext.Instance.AppInfo.UnlockedLevelsCount;
+		_saveSystem = new JsonSaveSystem();
+		UpdateAvailableLevels();
+	}
+
+	public void UpdateAvailableLevels()
+	{
+		int unlockedLevels = _saveSystem.Load().UnlockedLevelsCount;
 
 		for (int i = 0; i < _levels.Length; i++)
-		{
 			if (i + 1 > unlockedLevels)
-			{
 				_levels[i].interactable = false;
-			}
-		}
 	}
 
 	public async void Select(string sceneName)

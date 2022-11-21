@@ -235,7 +235,7 @@ MonoBehaviour:
   _progressFill: {fileID: 5221285822642942444}
   _loadingInfo: {fileID: 6758507269479530147}
   _loadingPercent: {fileID: 5646483852225924024}
-  _barSpeed: 5
+  _barSpeed: 1
 --- !u!1 &2531406368752316197
 GameObject:
   m_ObjectHideFlags: 0

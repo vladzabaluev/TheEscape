@@ -3398,6 +3398,7 @@ MonoBehaviour:
   _selectLevelCanvas: {fileID: 1087810721}
   _continueGame: {fileID: 1419849450}
   _newGame: {fileID: 339909761}
+  _levelSelection: {fileID: 557115252}
 --- !u!1001 &1522603779
 PrefabInstance:
   m_ObjectHideFlags: 0

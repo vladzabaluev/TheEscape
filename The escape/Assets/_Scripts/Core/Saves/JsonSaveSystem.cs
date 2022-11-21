@@ -11,8 +11,8 @@ public class JsonSaveSystem
 		if (File.Exists(_filePath))
 			return;
 
-		FileStream fs = File.Create(_filePath);
-		fs.Dispose();
+		FileStream fileStream = File.Create(_filePath);
+		fileStream.Dispose();
 		AppInfoContainer newData = new()
 		{
 			UnlockedLevelsCount = 1

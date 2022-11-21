@@ -1191,7 +1191,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1456595133}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
-        m_MethodName: ClickOptionsButton
+        m_MethodName: OnOptionsButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1203,7 +1203,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1456595133}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
-        m_MethodName: ClickBackOptionButton
+        m_MethodName: OnBackOptionButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1707,7 +1707,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 498283089}
         m_TargetAssemblyTypeName: CompletedLevelMenu, Assembly-CSharp
-        m_MethodName: ClickNextLevelButton
+        m_MethodName: OnNextLevelButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2827,7 +2827,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1456595133}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
-        m_MethodName: ClickOptionsButton
+        m_MethodName: OnOptionsButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4242,7 +4242,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1456595133}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
-        m_MethodName: ClickBacktoMainMenuButton
+        m_MethodName: OnBackToMainMenuButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4375,7 +4375,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 498283089}
         m_TargetAssemblyTypeName: CompletedLevelMenu, Assembly-CSharp
-        m_MethodName: ClickRestartButton
+        m_MethodName: OnRestartButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4641,7 +4641,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 498283089}
         m_TargetAssemblyTypeName: CompletedLevelMenu, Assembly-CSharp
-        m_MethodName: ClickBacktoMainMenuButton
+        m_MethodName: OnBackToMainMenuButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5146,7 +5146,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1456595133}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
-        m_MethodName: ClickLastCheckpointButton
+        m_MethodName: OnLastCheckpointButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5535,7 +5535,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1456595133}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
-        m_MethodName: ClickRestartButton
+        m_MethodName: OnRestartButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
