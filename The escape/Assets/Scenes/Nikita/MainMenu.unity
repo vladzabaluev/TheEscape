@@ -2221,7 +2221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635621586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7342b731897642b1aeaddf935ccfa9d2, type: 3}
   m_Name: 
@@ -5533,7 +5533,7 @@ GameObject:
   - component: {fileID: 2072907332}
   - component: {fileID: 2072907331}
   m_Layer: 0
-  m_Name: MainMenu
+  m_Name: MainMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5557,6 +5557,8 @@ MonoBehaviour:
   _play: {fileID: 1840725829}
   _settings: {fileID: 1989317436}
   _exit: {fileID: 840478782}
+  _confirmSettingsButton: {fileID: 367483267}
+  _closeSettingsButton: {fileID: 1055956413}
 --- !u!4 &2072907332
 Transform:
   m_ObjectHideFlags: 0

@@ -6,16 +6,21 @@ public class WinMenu : MonoBehaviour
 {
 	[SerializeField] private GameObject _levelCompleteMenu;
 	[SerializeField] private GameObject _settings;
+
+	[Header("Êíîïêè")]
 	[SerializeField] private Button _nextLevelButton;
+
 	[SerializeField] private Button _restartButton;
 	[SerializeField] private Button _settingsButton;
 	[SerializeField] private Button _exitButton;
 	[SerializeField] private Button _confirmSettingsButton;
-
+	[SerializeField] private Button _closeSettingsButton;
 	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
 
 	public event Action<string> NextLevel;
+
 	public event Action RestartLevel;
+
 	public event Action ExitMenu;
 
 	private string _nextLevelName;
@@ -27,7 +32,8 @@ public class WinMenu : MonoBehaviour
 
 		_settingsButton.onClick.AddListener(OnSettingsClick);
 		_exitButton.onClick.AddListener(OnExitMenuClicked);
-		_confirmSettingsButton.onClick.AddListener(OnConfirmClicked);
+		_confirmSettingsButton.onClick.AddListener(OnSettingsClose);
+		_closeSettingsButton.onClick.AddListener(OnSettingsClose);
 
 		_levelCompleteMenu.SetActive(false);
 		_settings.SetActive(false);
@@ -59,7 +65,7 @@ public class WinMenu : MonoBehaviour
 		_settings.SetActive(true);
 	}
 
-	private void OnConfirmClicked()
+	private void OnSettingsClose()
 	{
 		_levelCompleteMenu.SetActive(true);
 		_settings.SetActive(false);

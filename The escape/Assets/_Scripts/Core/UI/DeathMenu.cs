@@ -7,15 +7,18 @@ public class DeathMenu : MonoBehaviour
 	[SerializeField] private GameObject _deathMenu;
 	[SerializeField] private GameObject _settings;
 
+	[Header("Êíîïêè")]
 	[SerializeField] private Button _restartButton;
+
 	[SerializeField] private Button _lastCheckpointButton;
 	[SerializeField] private Button _settingsButton;
 	[SerializeField] private Button _exitButton;
 	[SerializeField] private Button _confirmSettingsButton;
-
+	[SerializeField] private Button _closeSettingsButton;
 	private PauseManager PauseManager => ProjectContext.Instance.PauseManager;
 
 	public event Action RestartLevel;
+
 	public event Action ExitMenu;
 
 	private void Start()
@@ -24,7 +27,8 @@ public class DeathMenu : MonoBehaviour
 		_lastCheckpointButton.onClick.AddListener(OnLastCheckpointClick);
 		_settingsButton.onClick.AddListener(OnSettingsClick);
 		_exitButton.onClick.AddListener(OnExitMenuClicked);
-		_confirmSettingsButton.onClick.AddListener(OnConfirmClicked);
+		_confirmSettingsButton.onClick.AddListener(OnSettingsClose);
+		_closeSettingsButton.onClick.AddListener(OnSettingsClose);
 
 		_deathMenu.SetActive(false);
 		_settings.SetActive(false);
@@ -53,7 +57,7 @@ public class DeathMenu : MonoBehaviour
 		_settings.SetActive(true);
 	}
 
-	private void OnConfirmClicked()
+	private void OnSettingsClose()
 	{
 		_deathMenu.SetActive(true);
 		_settings.SetActive(false);
