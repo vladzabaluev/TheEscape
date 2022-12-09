@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Level2 : Level, IPauseHandler
 {
-	public override Constants.Scenes SceneName => Constants.Scenes.NextLevel;
+	public override Constants.Scenes SceneName => Constants.Scenes.Default;
 
 	void IPauseHandler.SetPaused(bool isPaused)
 	{

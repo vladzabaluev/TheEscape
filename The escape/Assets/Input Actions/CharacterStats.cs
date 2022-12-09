@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -9,26 +7,26 @@ public class CharacterStats : MonoBehaviour
 
 	public HealthBar bar;
 
-	private int _currentHealth;
+	public int CurrentHealth;
 
 	private void Awake()
 	{
-		_currentHealth = MaxHealth;
+		CurrentHealth = MaxHealth;
 	}
 
 	protected virtual void Die() { }
 
-	private void Start()
+	protected virtual void Start()
 	{
 		bar.SetMaxHealth(MaxHealth);
 	}
 
-	public void TakeDamage(int damage)
+	public virtual void TakeDamage(int damage)
 	{
-		_currentHealth -= damage;
+		CurrentHealth -= damage;
 
-		bar.SetHealth(_currentHealth);
-		if (_currentHealth <= 0)
+		bar.SetHealth(CurrentHealth);
+		if (CurrentHealth <= 0)
 			Die();
 	}
 }
