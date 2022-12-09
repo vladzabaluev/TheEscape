@@ -6,7 +6,7 @@ public class Constants
 	public enum Scenes
 	{
 		MainMenu,
-		Demoscene,
-		NextLevel
+		NewLevel,
+		Default
 	}
 }

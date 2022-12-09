@@ -16,18 +16,22 @@ public class MovementController : MonoBehaviour
 	private Rigidbody2D _rigidbody;
 	private Transform _transform;
 	private GameObject _gameObject;
+	private Animator _animator;
 	private Vector3 _velocity = Vector3.zero;
 	private DirectionState _directionState = DirectionState.Right;
 
 	private const float GroundedRadius = 0.2f;
 	private bool _isGrounded;
 	private bool _isAllowJump;
+	private static readonly int s_speed = Animator.StringToHash("Speed");
+	private static readonly int s_isGrounded = Animator.StringToHash("IsGrounded");
 
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_transform = GetComponent<Transform>();
 		_gameObject = GetComponent<GameObject>();
+		_animator = GetComponent<Animator>();
 
 		OnLandEvent ??= new UnityEvent();
 
@@ -46,9 +50,9 @@ public class MovementController : MonoBehaviour
 				_isGrounded = true;
 				if (wasGrounded)
 				{
-					OnLandEvent.Invoke();
 					SwitchJumpPermission();
 				}
+				_animator.SetBool(s_isGrounded, wasGrounded);
 			}
 		}
 	}
@@ -60,6 +64,8 @@ public class MovementController : MonoBehaviour
 			Vector2 velocity = _rigidbody.velocity;
 			Vector3 targetVelocity = new Vector2(move * 10f, velocity.y);
 			_rigidbody.velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref _velocity, _movementSmoothing);
+
+			_animator.SetFloat(s_speed, Mathf.Abs(targetVelocity.x));
 
 			switch (move)
 			{
@@ -77,6 +83,7 @@ public class MovementController : MonoBehaviour
 		{
 			SwitchJumpPermission();
 			_isGrounded = false;
+			_animator.SetBool(s_isGrounded, true);
 			_rigidbody.AddForce(new Vector2(0f, jumpForce));
 		}
 	}

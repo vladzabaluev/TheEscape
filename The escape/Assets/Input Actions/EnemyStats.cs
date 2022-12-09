@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
+	protected new void Start()
+	{
+
+	}
+
 	protected override void Die()
     {
-        base.Die();
         Destroy(gameObject);
     }
 }
