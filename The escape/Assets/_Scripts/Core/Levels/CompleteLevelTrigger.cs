@@ -9,7 +9,7 @@ public class CompleteLevelTrigger : MonoBehaviour
 
 	private void Start()
 	{
-		_nextLevel = ((Constants.Scenes)((int)_level.SceneName + 1)).ToString();
+		_nextLevel = ((Constants.Scenes)((int)_level.SceneName /*+ 1*/)).ToString();
 	}
 
 	private void OnTriggerEnter2D(Collider2D col)

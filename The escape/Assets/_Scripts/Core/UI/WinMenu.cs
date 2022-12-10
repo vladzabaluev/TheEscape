@@ -43,8 +43,8 @@ public class WinMenu : MonoBehaviour
 	{
 		Debug.Log("com");
 		PauseManager.SetPaused(true);
-		_nextLevelName = nextLevel;
 		_levelCompleteMenu.SetActive(true);
+		_nextLevelName = nextLevel;
 	}
 
 	private void OnNextLevelClick()

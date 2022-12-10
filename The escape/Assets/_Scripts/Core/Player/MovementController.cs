@@ -5,6 +5,7 @@ public class MovementController : MonoBehaviour
 {
 	[Header("Movement Parameters")]
 	[Range(0, 0.3f)][SerializeField] private float _movementSmoothing = 0.08f;
+
 	[SerializeField] private bool _airControl = true;
 	[SerializeField] private LayerMask _whatIsGround;
 	[SerializeField] private Transform _groundCheck;
@@ -84,7 +85,7 @@ public class MovementController : MonoBehaviour
 			SwitchJumpPermission();
 			_isGrounded = false;
 			_animator.SetBool(s_isGrounded, true);
-			_rigidbody.AddForce(new Vector2(0f, jumpForce));
+			_rigidbody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
 		}
 	}
 
