@@ -2579,6 +2579,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 850134d72fe7efc43a7860d1b8cacba2, type: 3}
     - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de437e7f5be793d4586a5900959541fb, type: 3}
+    - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2849,6 +2853,10 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 850134d72fe7efc43a7860d1b8cacba2, type: 3}
+    - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de437e7f5be793d4586a5900959541fb, type: 3}
     - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -3702,6 +3710,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 850134d72fe7efc43a7860d1b8cacba2, type: 3}
     - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de437e7f5be793d4586a5900959541fb, type: 3}
+    - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -4275,6 +4287,10 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 850134d72fe7efc43a7860d1b8cacba2, type: 3}
+    - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de437e7f5be793d4586a5900959541fb, type: 3}
     - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -5892,6 +5908,10 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 850134d72fe7efc43a7860d1b8cacba2, type: 3}
+    - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de437e7f5be793d4586a5900959541fb, type: 3}
     - target: {fileID: 724979920171420904, guid: 0eed4c5d2d38fbdbb865c0f27ab57148, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
